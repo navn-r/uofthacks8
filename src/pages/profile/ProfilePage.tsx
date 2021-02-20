@@ -15,7 +15,7 @@ import AddRecipeModal from "../../components/add-recipe-modal/AddRecipeModal";
 import { useAuth } from "../../components/Auth/AuthProvider";
 import { useData } from "../../components/Data/DataContext";
 import RecipeCard from "../../components/recipe/RecipeCard";
-import { getRecipes } from "../../firebase/api";
+import { getRecipes, getAllUsers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfilePage.css";
 
@@ -26,6 +26,7 @@ const ProfilePage: React.FC = () => {
   const [recipes, setRecipes] = useState([] as Recipe[]);
   const [showModal, setShowModal] = useState(false);
   const [searchUser, setSearchUser] = useState("");
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -42,6 +43,7 @@ const ProfilePage: React.FC = () => {
     if (dataLoading) return;
     const unsubscribe = async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
+      setAllUsers(await getAllUsers());
     };
     unsubscribe();
   }, [dataUser, dataLoading]);
