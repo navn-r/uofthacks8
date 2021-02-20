@@ -96,9 +96,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
             <ol>
               {recipe.instructions.map((r) => (
                 <li key={r}>
-                  <div  className="steps-tag">
-                    {r}
-                  </div>
+                  <div className="steps-tag">{r}</div>
                 </li>
               ))}
             </ol>

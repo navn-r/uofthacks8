@@ -23,7 +23,7 @@ const ProfilePage: React.FC = () => {
   const { logout, user: authUser } = useAuth();
   const { user: dataUser, loading: dataLoading } = useData();
   const [recipes, setRecipes] = useState([] as Recipe[]);
-  const [ showModal, setShowModal ] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -38,7 +38,7 @@ const ProfilePage: React.FC = () => {
   };
 
   useEffect(() => {
-    if(dataLoading) return;
+    if (dataLoading) return;
     const unsubscribe = async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
     };
@@ -49,11 +49,16 @@ const ProfilePage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonTitle color="primary" class="ion-text-west">Munchify</IonTitle>
+          <IonTitle color="primary" class="ion-text-west">
+            Munchify
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <AddRecipeModal showModal={showModal} onSuccess={() => setShowModal(false)}/>
+        <AddRecipeModal
+          showModal={showModal}
+          onSuccess={() => setShowModal(false)}
+        />
         <div className="user-info">
           <IonAvatar>
             <img src={authUser.photoURL} />
@@ -98,10 +103,16 @@ const ProfilePage: React.FC = () => {
           </IonButton>
         </div>
         <div className="item-divider"></div>
-        <div className="user-recipes-container">
+        {dataLoading ? (
+          <IonSpinner />
+        ) : (
+          <div className="user-recipes-container">
             <h4>My Recipes</h4>
-            {recipes.map((r, i) => <RecipeCard user={dataUser} recipe={r} key={i} />)}
-        </div>
+            {!!recipes && recipes.map((r, i) => (
+              <RecipeCard user={dataUser} recipe={r} key={i} />
+            ))}
+          </div>
+        )}
       </IonContent>
     </IonPage>
   );

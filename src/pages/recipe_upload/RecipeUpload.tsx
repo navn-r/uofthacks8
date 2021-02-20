@@ -263,7 +263,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         id="submit-button"
         onClick={() =>
           recipeSubmit({
-            foodItems,
+            foodItems: ingredients,
             cost,
             desc,
             instructions: steps,
