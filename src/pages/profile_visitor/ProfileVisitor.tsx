@@ -97,7 +97,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({user, showModal, onSuccess}) =
         </div>
         <div className="item-divider"></div>
           <div className="user-recipes-container">
-            <h4>My Recipes</h4>
+            <h4>Recipes</h4>
             {!!recipes && recipes.map((r, i) => (
               <RecipeCard recipe={r} key={i} />
             ))}
