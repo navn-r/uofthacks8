@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import { db, auth } from "./config";
 import { Recipe, User } from "./models";
-import { tags } from "./constants";
+import { tags as TAGS } from "./constants";
 const userCollection = "users";
 const recipeCollection = "recipes";
 
@@ -106,13 +106,13 @@ export const makeRecipe = async (recipe : {
   var reader = new FileReader();
   reader.readAsDataURL(await fetch(recipe.url).then(r => r.blob())); 
   return reader.onloadend = function() {
+    console.log(recipe.tags);
      const newRecipe : RecipeTemp = {...recipe, 
-      cost : cost, 
-      tags: tags.filter((tag, i) =>  recipe.tags[i]),
+      cost : cost ?? "cheap", 
+      tags: TAGS.filter((_, i) => !!recipe.tags[i]),
       url : reader.result as string
       }
-      console.log(reader.result);
-      
+      console.log(newRecipe);      
       return addRecipe(newRecipe as Recipe)
   }
 }

@@ -48,21 +48,23 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       setMeasure([]);
       setSteps([""]);
       setTitle("");
-      setTagItems(tagItems.fill(false));
+      const tags = [...tagItems].map(tag => false);
+      setTagItems(tags);
     };
     clearData();
   }, [showModal]);
 
-  const recipeSubmit = (recipeObj: {
-    foodItems: string[];
-    cost: number;
-    desc: string;
-    instructions: string[];
-    tags: boolean[];
-    url: string;
-    title: string;
-  }) => {
-    makeRecipe(recipeObj);
+  const recipeSubmit = () => {
+    const temp = {
+      foodItems: ingredients,
+      cost,
+      desc,
+      instructions: steps,
+      url: img,
+      title,
+    } as any;
+    temp.tags = [...tagItems];
+    makeRecipe(temp);
     onSuccess();
   };
 
@@ -230,9 +232,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
                   <IonLabel>{item}</IonLabel>
                   <IonCheckbox
                     onClick={() => {
-                      const cpy = [...tagItems];
-                      cpy[index] = !cpy[index];
-                      setTagItems(cpy);
+                      const copy = [...tagItems];
+                      copy[index] = !copy[index];
+                      setTagItems(copy);
                     }}
                   />
                 </IonItem>
@@ -261,17 +263,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         color="success"
         expand="block"
         id="submit-button"
-        onClick={() =>
-          recipeSubmit({
-            foodItems: ingredients,
-            cost,
-            desc,
-            instructions: steps,
-            tags: tagItems,
-            url: img,
-            title,
-          })
-        }
+        onClick={() => recipeSubmit()}
       >
         Make Recipe
       </IonButton>
