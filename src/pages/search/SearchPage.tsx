@@ -12,7 +12,7 @@ const SearchPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-center">Search</IonTitle>
+        <IonTitle color="primary" class="ion-text-west">Munchify</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen >
