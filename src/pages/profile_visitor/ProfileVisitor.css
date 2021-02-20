@@ -38,11 +38,6 @@
 
 .profile-button-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 1rem;
-  padding: 0 1rem;
-  margin-top: 1rem;
 }
 
 .item-divider {

@@ -13,7 +13,7 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import RecipeCard from "../../components/recipe/RecipeCard";
-import { addFollower } from "../../firebase/api";
+import { addFollower, getRecipes} from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfileVisitor.css";
 import { close } from "ionicons/icons";
@@ -30,16 +30,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({user, showModal, onSuccess}) =
   const [recipes, setRecipes] = useState([] as Recipe[]);
 
 
-  // useEffect(() => {
-  //   if (dataLoading) return;
-  //   const unsubscribe = async () => {
-  //     setRecipes(await getRecipes(dataUser.recipeIds));
-  //   };
-  //   unsubscribe();
-  // }, [dataUser, dataLoading]);
-  const follow = () =>{
-    addFollower(user.id)
-  }
+  useEffect(() => {
+
+    const unsubscribe = async () => {
+      setRecipes(await getRecipes(user.recipeIds));
+    };
+    unsubscribe();
+  }, [user]);
+
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
       <IonHeader>
@@ -89,12 +87,13 @@ const ProfilePage: React.FC<ProfilePageProps> = ({user, showModal, onSuccess}) =
         <div className="profile-button-container">
           <IonButton
             mode="ios"
-            onClick={follow}
+            onClick={() => addFollower(user.id)}
             expand="block"
             color="primary"
           >
             Follow
           </IonButton>
+
         </div>
         <div className="item-divider"></div>
           <div className="user-recipes-container">
