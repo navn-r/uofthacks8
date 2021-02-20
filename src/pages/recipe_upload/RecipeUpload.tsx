@@ -86,7 +86,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         <IonItem>
           <IonTextarea
             placeholder="What's your recipe name"
-            value={desc}
+            value={title}
             onIonChange={(e) => setTitle(e.detail.value!)}
           ></IonTextarea>
         </IonItem>
