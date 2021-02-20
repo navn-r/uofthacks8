@@ -2,6 +2,7 @@ export interface User {
   followerIds: string[];
   followingIds: string[];
   recipeIds: string[];
+  pfpUrl: string;
 }
 export interface Recipe {
   foodItems: string[];
