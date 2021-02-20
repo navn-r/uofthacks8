@@ -12,6 +12,7 @@
 .tags-container .inner {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .tags-container h6 {
@@ -24,6 +25,7 @@
   border-radius: 5px;
   margin: 0.25rem;
   color: var(--ion-color-light);
+  font-size: 0.75rem;
 }
 
 .recipe-info {
