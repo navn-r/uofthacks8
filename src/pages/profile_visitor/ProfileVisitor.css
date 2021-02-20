@@ -53,3 +53,7 @@
   font-weight: 300;
   font-size: 1.5rem;
 }
+
+.modal-profile {
+ grid-template-columns: auto !important; 
+}
