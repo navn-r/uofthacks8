@@ -15,7 +15,7 @@ import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
-import {makeRecipe} from "../../firebase/api"
+import { makeRecipe } from "../../firebase/api";
 interface RecipeUploadProps {
   onSuccess: () => any;
   showModal: boolean;
@@ -52,23 +52,24 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     clearData();
   }, [showModal]);
 
-  const recipeSubmit = (recipeObj : {
-    foodItems : string[],
+  const recipeSubmit = (recipeObj: {
+    foodItems: string[];
     cost: number;
     desc: string;
     instructions: string[];
     tags: boolean[];
     url: string;
-  }) =>{
-    makeRecipe(recipeObj)
+  }) => {
+    makeRecipe(recipeObj);
     onSuccess();
-  }
+  };
 
   return (
     <div className="recipe-upload-container">
-      <div>
-        <IonItem>
-          Upload an image
+      <div className="image-upload-container">
+      {!!img && <img src={img} />}
+
+        <div className="image-upload-input-container">
           <input
             name="photo"
             type="file"
@@ -77,10 +78,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
               setImg(URL.createObjectURL(e.target.files![0]));
             }}
           />
-          <IonImg src={img} />
-        </IonItem>
+        </div>
       </div>
-      <div>
+      <div className="desc-input">
         <IonItem>
           <IonTextarea
             placeholder="Talk about your recipe here..."
@@ -172,34 +172,42 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       </div>
       <div className="steps-container">
         {steps.map((item, index) => (
-          <IonInput
-            key={index}
-            placeholder={`Enter step ${index + 1}`}
-            onIonChange={(e) => {
-              const cpy = [...steps];
-              cpy[index] = e.detail.value!;
-              setSteps(cpy);
-            }}
-            value={item}
-          />
+          <div className="step-inner-container" key={index}>
+            <IonInput
+              key={index}
+              placeholder={`Enter step ${index + 1}`}
+              onIonChange={(e) => {
+                const cpy = [...steps];
+                cpy[index] = e.detail.value!;
+                setSteps(cpy);
+              }}
+              value={item}
+            />
+            {!!index && (
+              <IonButton
+                fill="clear"
+                color="danger"
+                onClick={() => {
+                  setSteps(steps.filter((_, i) => i !== index))
+                }}
+                size="small"
+              >
+                <IonIcon slot="icon-only" icon={close}></IonIcon>
+              </IonButton>
+            )}
+          </div>
         ))}
         <IonButton
+          color="dark"
+          fill="outline"
+          expand="block"
           onClick={() => {
             setSteps([...steps, ""]);
           }}
         >
           Add new step
         </IonButton>
-        <IonButton
-          color="danger"
-          onClick={() => {
-            const cpy = [...steps];
-            if (cpy.length) cpy.pop();
-            setSteps(cpy);
-          }}
-        >
-          Remove step
-        </IonButton>
+        {/* */}
       </div>
       <div>
         <IonList>
@@ -225,21 +233,37 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       <div>
         <h4 className="cost-title">Cost</h4>
         <IonItem>
-          <IonRange min={1} max={4} step={1} snaps={true} color="secondary" onIonChange={e => setCost(e.detail.value as number)}>
+          <IonRange
+            min={1}
+            max={4}
+            step={1}
+            snaps={true}
+            color="secondary"
+            onIonChange={(e) => setCost(e.detail.value as number)}
+          >
             <IonLabel slot="start">$</IonLabel>
             <IonLabel slot="end">$$$$</IonLabel>
           </IonRange>
         </IonItem>
       </div>
-      <IonButton color="success" expand="block" id="submit-button" onClick={() => recipeSubmit({
-        foodItems, cost, desc,
-        instructions: steps,
-        tags: tagItems,
-        url: img
-      })}>
+      <IonButton
+        color="success"
+        expand="block"
+        id="submit-button"
+        onClick={() =>
+          recipeSubmit({
+            foodItems,
+            cost,
+            desc,
+            instructions: steps,
+            tags: tagItems,
+            url: img,
+          })
+        }
+      >
         Make Recipe
       </IonButton>
-    </div> 
+    </div>
   );
 };
 
