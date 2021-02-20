@@ -24,9 +24,9 @@ const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent className="background" fullscreen>
+      <IonContent fullscreen>
         <div className="splash-container"> 
-          <h1>Munchify</h1>
+          <h1 style={{fontFamily: 'Covered By Your Grace', fontSize: '6rem'}}>Munchify</h1>
           <IonButton mode="ios" onClick={onLogin} expand="block" color="primary">
             <IonIcon size="small" slot="start" icon={logoGoogle} />
             Sign in

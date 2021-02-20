@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
       );
     };
     unsubscribe();
-  }, [user, loading]);
+  }, [loading]);
 
   const goToProfile = (f: { id: string; photoURL: string }) => {
     setVisitorId(f.id);
@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle color="primary" class="ion-text-west">
+          <IonTitle color="primary" style={{fontFamily: 'Covered By Your Grace', fontSize: '1.75rem'}} class="ion-text-west">
             Munchify
           </IonTitle>
         </IonToolbar>

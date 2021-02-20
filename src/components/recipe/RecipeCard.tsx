@@ -26,7 +26,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
       setUser(await getUser(recipe.userId));
     };
     unsubscribe();
-  }, [user, recipe]);
+  }, [recipe]);
 
   return !!user && !!recipe ? (
     <>
