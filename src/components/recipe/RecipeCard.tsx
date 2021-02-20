@@ -47,4 +47,4 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
   );
 };
 
-export default RecipeCard;
+export default React.memo(RecipeCard);

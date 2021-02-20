@@ -10,6 +10,7 @@ import {
 } from "@ionic/react";
 import { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import AddRecipeModal from "../../components/add-recipe-modal/AddRecipeModal";
 import { useAuth } from "../../components/Auth/AuthProvider";
 import { useData } from "../../components/Data/DataContext";
 import RecipeCard from "../../components/recipe/RecipeCard";
@@ -22,6 +23,7 @@ const ProfilePage: React.FC = () => {
   const { logout, user: authUser } = useAuth();
   const { user: dataUser, loading: dataLoading } = useData();
   const [recipes, setRecipes] = useState([] as Recipe[]);
+  const [ showModal, setShowModal ] = useState(false);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -32,6 +34,7 @@ const ProfilePage: React.FC = () => {
 
   const addRecipe = () => {
     console.log("add recipe here");
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -50,6 +53,7 @@ const ProfilePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <AddRecipeModal showModal={showModal} onSuccess={() => setShowModal(false)}/>
         <div className="user-info">
           <IonAvatar>
             <img src={authUser.photoURL} />
