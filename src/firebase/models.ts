@@ -14,4 +14,5 @@ export interface Recipe {
   instructions: string[];
   tags: string[];
   url: string;
+  userId : string;
 }

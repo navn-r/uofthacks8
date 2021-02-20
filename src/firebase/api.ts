@@ -89,6 +89,8 @@ interface RecipeTemp {
   instructions: string[];
   tags: string[]; // index of which tags are used
   url: string;
+  title: string;
+  userId : string;
 }
 
 export const makeRecipe = async (recipe : {
@@ -98,9 +100,10 @@ export const makeRecipe = async (recipe : {
     instructions: string[];
     tags: boolean[]; // index of which tags are used
     url: string;
-    title: string
+    title: string;
   }) : Promise<any> =>
   {
+
   const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
   
   var reader = new FileReader();
@@ -109,9 +112,9 @@ export const makeRecipe = async (recipe : {
      const newRecipe : RecipeTemp = {...recipe, 
       cost : cost, 
       tags: tags.filter((tag, i) =>  recipe.tags[i]),
-      url : reader.result as string
+      url : reader.result as string,
+      userId : getId()
       }
-      console.log(reader.result);
       
       return addRecipe(newRecipe as Recipe)
   }
