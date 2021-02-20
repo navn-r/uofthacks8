@@ -59,6 +59,7 @@ const RecipeUpload: React.FC = () => {
                 return (
                   <IonButton
                     color="primary"
+                    mode="ios"
                     key={item}
                     onClick={() => {
                       if (!ingredients.includes(item))
