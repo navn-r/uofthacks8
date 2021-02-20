@@ -75,15 +75,15 @@ const ProfilePage: React.FC = () => {
             <>
               <div className="follower-box">
                 <h4>{(dataUser as User).recipeIds.length}</h4>
-                <p>Recipes</p>
+                <p>Munchies</p>
               </div>
               <div className="follower-box">
                 <h4>{(dataUser as User).followerIds.length}</h4>
-                <p>Followers</p>
+                <p>Munchers</p>
               </div>
               <div className="follower-box">
                 <h4>{(dataUser as User).followingIds.length}</h4>
-                <p>Following</p>
+                <p>Munching</p>
               </div>
             </>
           )}
@@ -95,7 +95,7 @@ const ProfilePage: React.FC = () => {
             expand="block"
             color="primary"
           >
-            Add Recipe
+            Add Munchie
           </IonButton>
           <IonButton
             mode="ios"
@@ -119,7 +119,7 @@ const ProfilePage: React.FC = () => {
           <IonSpinner />
         ) : (
           <div className="user-recipes-container">
-            <h4>My Recipes</h4>
+            <h4>My Munchies</h4>
             {!!recipes &&
               recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
           </div>

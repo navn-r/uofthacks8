@@ -75,15 +75,15 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               <>
                 <div className="follower-box">
                   <h4>{(profileUser as User).recipeIds.length}</h4>
-                  <p>Recipes</p>
+                  <p>Munchies</p>
                 </div>
                 <div className="follower-box">
                   <h4>{(profileUser as User).followerIds.length}</h4>
-                  <p>Followers</p>
+                  <p>Munchers</p>
                 </div>
                 <div className="follower-box">
                   <h4>{(profileUser as User).followingIds.length}</h4>
-                  <p>Following</p>
+                  <p>Munching</p>
                 </div>
               </>
             </div>
@@ -94,7 +94,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                 expand="block"
                 color="primary"
               >
-                Follow
+                Munch!
               </IonButton>
             </div>
             <div className="item-divider"></div>
