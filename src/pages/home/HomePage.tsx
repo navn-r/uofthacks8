@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useData } from "../../components/Data/DataContext";
 import RecipeCard from "../../components/recipe/RecipeCard";
-import { getAllRecipes, getFollowers } from "../../firebase/api";
+import { getAllRecipes, getAllUsers, getFollowers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import ProfileVisitor from "../profile_visitor/ProfileVisitor";
 import "./HomePage.css";
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     if (loading) return;
     const unsubscribe = async () => {
-      const followers = await getFollowers(user.followingIds);
+      const followers = await getAllUsers();
       const recipes = await getAllRecipes();
       setRecipes(recipes);
       setFollowers(
@@ -61,7 +61,7 @@ const HomePage: React.FC = () => {
           showModal={showProfileModal}
           onSuccess={() => setShowProfileModal(false)}
         />
-        <h4 className="home-page-followers-title">Followers:</h4>
+        <h4 className="home-page-followers-title">Munchers:</h4>
         <div className="followers-icon-container">
           {followers.map((f, i) => (
             <IonAvatar key={i} onClick={goToProfile.bind(null, f)}>
