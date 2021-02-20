@@ -9,7 +9,7 @@ import { home, person, search } from "ionicons/icons";
 import { Redirect, Route } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import ProfilePage from "./profile/ProfilePage";
-import SearchPage from "./search/SearchPage";
+import RecipeSearch from "./recipe_search/RecipeSearch";
 const TabRoot: React.FC = () => {
   return (
     <IonTabs>
@@ -21,7 +21,7 @@ const TabRoot: React.FC = () => {
           <HomePage />
         </Route>
         <Route path="/main/search">
-          <SearchPage />
+          <RecipeSearch />
         </Route>
         <Redirect to="/main/home" from="/main" exact />
       </IonRouterOutlet>
