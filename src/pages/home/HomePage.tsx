@@ -59,9 +59,9 @@ const HomePage: React.FC = () => {
       <IonContent fullscreen>
         <h4 className="home-page-followers-title">Followers:</h4>
         <div className="followers-icon-container">
-          {followers.map((f: any) => (
-            <IonAvatar key={f.id}>
-              <img src={f.photoURL} />
+          {(!!followers.length ? followers : MockFollowers).map((f, i) => (
+            <IonAvatar key={i}>
+              <img src={f.photoURL ?? f} />
             </IonAvatar>
           ))}
         </div>
