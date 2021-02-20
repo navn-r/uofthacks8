@@ -3,40 +3,42 @@ import {
   IonButton,
   IonContent,
   IonHeader,
+  IonIcon,
   IonModal,
-  IonPage,
   IonSpinner,
   IonTitle,
   IonToolbar,
-  IonIcon
 } from "@ionic/react";
-import { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { close } from "ionicons/icons";
+import React, { useEffect, useState } from "react";
 import RecipeCard from "../../components/recipe/RecipeCard";
-import { addFollower, getRecipes} from "../../firebase/api";
+import { addFollower, getRecipes, getUser } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfileVisitor.css";
-import { close } from "ionicons/icons";
 
 interface ProfilePageProps {
-  user: User;
+  userId: string;
   showModal: boolean;
   onSuccess: () => void;
 }
 
-
-const ProfilePage: React.FC<ProfilePageProps> = ({user, showModal, onSuccess}) => {
-  const history = useHistory();
+const ProfilePage: React.FC<ProfilePageProps> = ({
+  userId,
+  showModal,
+  onSuccess,
+}) => {
   const [recipes, setRecipes] = useState([] as Recipe[]);
-
+  const [profileUser, setProfileUser] = useState(null as unknown as User);
 
   useEffect(() => {
-
     const unsubscribe = async () => {
+      if (!userId) return;
+      const user = await getUser(userId);
+      setProfileUser(user);
       setRecipes(await getRecipes(user.recipeIds));
     };
     unsubscribe();
-  }, [user]);
+  }, []);
 
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
@@ -57,52 +59,54 @@ const ProfilePage: React.FC<ProfilePageProps> = ({user, showModal, onSuccess}) =
           </div>
         </IonToolbar>
       </IonHeader>
-      
+
       <IonContent fullscreen>
-        <div className="user-info">
-          <IonAvatar>
-            <img src={user.photoURL} />
-          </IonAvatar>
-          <div className="info-title">
-            <h3>{user.displayName}</h3>
-          </div>
-        </div>
-        <div className="follower-info">
+        {!!profileUser ? (
           <>
-          <div className="follower-box">
-              <h4>{(user as User).recipeIds.length}</h4>
-              <p>Recipes</p>
+            <div className="user-info">
+              <IonAvatar>
+                <img src={profileUser.photoURL} />
+              </IonAvatar>
+              <div className="info-title">
+                <h3>{profileUser.displayName}</h3>
+              </div>
             </div>
-            <div className="follower-box">
-              <h4>{(user as User).followerIds.length}</h4>
-              <p>Followers</p>
+            <div className="follower-info">
+              <>
+                <div className="follower-box">
+                  <h4>{(profileUser as User).recipeIds.length}</h4>
+                  <p>Recipes</p>
+                </div>
+                <div className="follower-box">
+                  <h4>{(profileUser as User).followerIds.length}</h4>
+                  <p>Followers</p>
+                </div>
+                <div className="follower-box">
+                  <h4>{(profileUser as User).followingIds.length}</h4>
+                  <p>Following</p>
+                </div>
+              </>
             </div>
-            <div className="follower-box">
-              <h4>{(user as User).followingIds.length}</h4>
-              <p>Following</p>
+            <div className="profile-button-container">
+              <IonButton
+                mode="ios"
+                onClick={() => addFollower(profileUser.id)}
+                expand="block"
+                color="primary"
+              >
+                Follow
+              </IonButton>
+            </div>
+            <div className="item-divider"></div>
+            <div className="user-recipes-container">
+              <h4>My Recipes</h4>
+              {!!recipes &&
+                recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
             </div>
           </>
-          
-        </div>
-        <div className="profile-button-container">
-          <IonButton
-            mode="ios"
-            onClick={() => addFollower(user.id)}
-            expand="block"
-            color="primary"
-          >
-            Follow
-          </IonButton>
-
-        </div>
-        <div className="item-divider"></div>
-          <div className="user-recipes-container">
-            <h4>Recipes</h4>
-            {!!recipes && recipes.map((r, i) => (
-              <RecipeCard recipe={r} key={i} />
-            ))}
-          </div>
-        
+        ) : (
+          <IonSpinner />
+        )}
       </IonContent>
     </IonModal>
   );
