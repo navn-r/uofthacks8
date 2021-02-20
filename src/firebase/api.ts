@@ -28,6 +28,8 @@ export const addRecipe = (recipe: Recipe) => {
       recipeIds: firebase.firestore.FieldValue.arrayUnion(rId),
     });
 };
-// export const getUser = async () => {
-//   const doc = (await db.collection(userCollection).doc(uId).get()).data as User
-// };
+export const getUser = async () => {
+  const doc = await db.collection(userCollection).doc(uId).get();
+  if (!doc.exists) console.log("getUser doesnt exist");
+  else return doc.data() as User;
+};
