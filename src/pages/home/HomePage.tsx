@@ -7,7 +7,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { navigate } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useData } from "../../components/Data/DataContext";
 import RecipeCard from "../../components/recipe/RecipeCard";
@@ -30,7 +29,7 @@ const MockFollowers = [
 
 const HomePage: React.FC = () => {
   const { user, loading } = useData();
-  const [ visitorId, setVisitorId ] = useState("");
+  const [visitorId, setVisitorId] = useState("");
   const [followers, setFollowers] = useState([] as any[]);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [recipes, setRecipes] = useState([] as Recipe[]);
@@ -53,7 +52,7 @@ const HomePage: React.FC = () => {
     unsubscribe();
   }, [user, loading]);
 
-  const goToProfile = (f: {id: string, photoURL: string}) => {
+  const goToProfile = (f: { id: string; photoURL: string }) => {
     setVisitorId(f.id);
     setShowProfileModal(true);
   };
@@ -68,11 +67,11 @@ const HomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-      <ProfileVisitor
-        userId={visitorId}
-        showModal={showProfileModal}
-        onSuccess={() => setShowProfileModal(false)}
-      />
+        <ProfileVisitor
+          userId={visitorId}
+          showModal={showProfileModal}
+          onSuccess={() => setShowProfileModal(false)}
+        />
         <h4 className="home-page-followers-title">Followers:</h4>
         <div className="followers-icon-container">
           {followers.map((f, i) => (
