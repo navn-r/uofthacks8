@@ -78,3 +78,13 @@ export const getRecipe = async (uid: string): Promise<any> => {
 export const getRecipes = async (recipes: string[]): Promise<any> => {
   return Promise.all(recipes.map(id => getRecipe(id)));
 };
+
+export const makeRecipe = async (recipe : {
+    foodItems : string[],
+    cost: "cheap" | "normal" | "expensive" | "high end";
+    desc: string;
+    instructions: string[];
+    tags: string[];
+  }) =>{
+  return addRecipe({...recipe, url : "SOME URL"} as Recipe)
+}
