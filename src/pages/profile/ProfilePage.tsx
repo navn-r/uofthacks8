@@ -22,6 +22,7 @@ import RecipeCard from "../../components/recipe/RecipeCard";
 import { getRecipes, getAllUsers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfilePage.css";
+import ProfileVisitor from "../../pages/profile_visitor/ProfileVisitor";
 
 const ProfilePage: React.FC = () => {
   const history = useHistory();
@@ -32,6 +33,7 @@ const ProfilePage: React.FC = () => {
   const [showExpandedUsers, setShowExpandedUsers] = useState(false);
   const [searchUser, setSearchUser] = useState("");
   const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [showUser, setShowUser] = useState<User | null>(null);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -46,11 +48,12 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     if (dataLoading) return;
-    const unsubscribe = async () => {
+    (async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
-      setAllUsers(await getAllUsers());
-    };
-    unsubscribe();
+      setAllUsers(
+        (await getAllUsers()).filter((user) => user.id !== dataUser.id)
+      );
+    })();
   }, [dataUser, dataLoading]);
   return (
     <IonPage>
@@ -123,7 +126,10 @@ const ProfilePage: React.FC = () => {
               size="small"
               onClick={() => setShowExpandedUsers(!showExpandedUsers)}
             >
-              <IonIcon slot="icon-only" icon={!showExpandedUsers ? chevronDown : chevronUp}></IonIcon>
+              <IonIcon
+                slot="icon-only"
+                icon={!showExpandedUsers ? chevronDown : chevronUp}
+              ></IonIcon>
             </IonButton>
           </div>
           {showExpandedUsers && (
@@ -138,12 +144,21 @@ const ProfilePage: React.FC = () => {
                     return user.displayName.includes(searchUser);
                   })
                   .map((user) => (
-                    <IonItem key={user.displayName}>{user.displayName}</IonItem>
+                    <IonItem
+                      key={user.displayName}
+                      onClick={() => setShowUser(user)}
+                    >
+                      <IonAvatar>
+                        <img src={user.photoURL} alt="avatar" />
+                      </IonAvatar>
+                      <p className={"avatar-name"}>{user.displayName}</p>
+                    </IonItem>
                   ))}
               </IonList>
             </>
           )}
         </div>
+
         <div className="item-divider"></div>
         {dataLoading ? (
           <IonSpinner />
@@ -155,6 +170,13 @@ const ProfilePage: React.FC = () => {
           </div>
         )}
       </IonContent>
+      <ProfileVisitor
+        userId={showUser ? showUser.id : ""}
+        showModal={!!showUser}
+        onSuccess={() => {
+          setShowUser(null);
+        }}
+      />
     </IonPage>
   );
 };
