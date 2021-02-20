@@ -11,7 +11,6 @@ import { Redirect, Route } from "react-router-dom";
 import Tab1 from "./profile/Tab1";
 import HomePage from "./home/HomePage";
 import SearchPage from "./search/SearchPage";
-
 const TabRoot: React.FC = () => {
   return (
     <IonTabs>

@@ -29,3 +29,6 @@ export interface Nutrient {
   name: string;
   unitName: string;
 }
+export interface MeasureUnit {
+  measureUnit: string;
+}

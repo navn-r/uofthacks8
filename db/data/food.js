@@ -31,6 +31,6 @@
 //   "mozzarella cheese"
 // ].forEach((item, index) => {
 //   db.collection("foods").doc(index + "").set({
-//     name: item[0],
+//     name: item,
 //   });
 // });
