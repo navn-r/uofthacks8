@@ -5,6 +5,10 @@ import { Recipe, User } from "./models";
 const uId = (auth.currentUser as firebase.User).uid;
 const userCollection = "users";
 const recipeCollection = "recipes";
+const foodItemCollection = "fooditems";
+const foodCollection = "foods";
+const foodNutrientCollection = "foodnutrients";
+const nutrientCollection = "nutrients";
 export const addFollower = (followerId: string) => {
   db.collection(userCollection)
     .doc(uId)
