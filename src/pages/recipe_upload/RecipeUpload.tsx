@@ -1,6 +1,7 @@
 import {
   IonButton,
   IonCheckbox,
+  IonIcon,
   IonImg,
   IonInput,
   IonItem,
@@ -10,19 +11,23 @@ import {
   IonSearchbar,
   IonTextarea,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
 import {makeRecipe} from "../../firebase/api"
 interface RecipeUploadProps {
   onSuccess: () => any;
-  showModal: boolean
+  showModal: boolean;
 }
 
-const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => {
+const RecipeUpload: React.FC<RecipeUploadProps> = ({
+  onSuccess,
+  showModal,
+}) => {
   const [desc, setDesc] = React.useState("");
   const [search, setSearch] = React.useState("");
-  const [foodItems, setFoodItems] = React.useState(foods);
+  const [foodItems, setFoodItems] = React.useState<string[]>([]);
   const [ingredients, setIngredients] = React.useState<string[]>([]);
   const [amounts, setAmounts] = React.useState<string[]>([]);
   const [measure, setMeasure] = React.useState<string[]>([]);
@@ -41,7 +46,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
       setAmounts([]);
       setMeasure([]);
       setSteps([""]);
-      setTagItems(Array(tags.length).fill(false));
+      setTagItems(tagItems.fill(false));
     };
     clearData();
   }, [showModal]);
@@ -88,37 +93,44 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
           value={search}
           placeholder="Search for ingredients"
           onIonChange={(e) => {
-            setFoodItems(
-              foods.filter((food) => food.startsWith(e.detail.value!))
-            );
+            const input = e.detail.value!.trim().toLowerCase();
             setSearch(e.detail.value!);
+            if (!input || input.length < 3) {
+              setFoodItems([]);
+              return;
+            }
+            const items = foods
+              .filter((food) => food.startsWith(input))
+              .slice(0, 10);
+            if (items !== foodItems) setFoodItems(items);
           }}
           showCancelButton="never"
         />
-        <IonList>
-          {foodItems.length <= 3 &&
+        <div className="food-items">
+          {foodItems.length <= 10 &&
             foodItems.map((item) => {
               return (
-                <IonButton
-                  color="primary"
-                  mode="ios"
+                <div
                   key={item}
+                  className="food-item-tag"
                   onClick={() => {
                     if (!ingredients.includes(item))
                       setIngredients([...ingredients, item]);
                   }}
                 >
                   {item}
-                </IonButton>
+                </div>
               );
             })}
-        </IonList>
+        </div>
         <IonList>
-          <div className="ingredient-titles-container">
-            <p>Ingredient</p>
-            <p>amount</p>
-            <p>measure unit</p>
-          </div>
+          {!!ingredients.length && (
+            <div className="ingredient-titles-container">
+              <p>Ingredient</p>
+              <p>amount</p>
+              <p>measure unit</p>
+            </div>
+          )}
           <div className="ingredient-list">
             {ingredients.map((item, index) => (
               <div className="ingredient-item-row" key={item}>
@@ -142,13 +154,15 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
                   }}
                 />
                 <IonButton
+                  fill="clear"
                   color="danger"
                   onClick={() => {
                     setAmounts(amounts.filter((_, i) => i !== index));
                     setIngredients(ingredients.filter((_, i) => i !== index));
                   }}
+                  size="small"
                 >
-                  Remove
+                  <IonIcon slot="icon-only" icon={close}></IonIcon>
                 </IonButton>
               </div>
             ))}
@@ -188,6 +202,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
       </div>
       <div>
         <IonList>
+          <h4 className="tags-title">Tags</h4>
           <div className="taglist">
             {tags.map((item, index) => {
               return (
@@ -207,6 +222,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
         </IonList>
       </div>
       <div>
+        <h4 className="cost-title">Cost</h4>
         <IonItem>
           <IonRange min={1} max={4} step={1} snaps={true} color="secondary">
             <IonLabel slot="start">$</IonLabel>
