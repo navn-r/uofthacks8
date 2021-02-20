@@ -20,7 +20,8 @@ import { close } from "ionicons/icons";
 import React from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeSearch.css";
-
+import { getAllRecipes } from "../../firebase/api";
+import { Recipe } from "../../firebase/models";
 const RecipeSearch: React.FC = () => {
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState<string[]>([]);
@@ -34,7 +35,38 @@ const RecipeSearch: React.FC = () => {
   }
   const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
   const [title, setTitle] = React.useState("");
-
+  const findRecipe = () => {
+    const filteredTags = tags.filter((_, index) => tagItems[index]);
+    getAllRecipes().then((recipes) => {
+      const filteredRecipes = [];
+      for (let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i];
+        if (!recipe.title.startsWith(title)) continue;
+        let hasTag = false;
+        for (let j = 0; j < recipe.tags.length; j++) {
+          if (filteredTags.includes(recipe.tags[j])) {
+            hasTag = true;
+            break;
+          }
+        }
+        if (!hasTag) continue;
+        const costs = ["cheap", "normal", "expensive", "high end"].filter(
+          (_, index) => {
+            return cost.lower <= index && index <= cost.upper;
+          }
+        );
+        if (!costs.includes(recipe.cost)) break;
+        let hasAllIngredients = true;
+        for (let j = 0; j < ingredients.length; j++) {
+          if (!recipe.foodItems.includes(ingredients[j]))
+            hasAllIngredients = false;
+        }
+        if (!hasAllIngredients) break;
+        filteredRecipes.push(recipe);
+      }
+      console.log(filteredRecipes);
+    });
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -152,7 +184,7 @@ const RecipeSearch: React.FC = () => {
                 snaps={true}
                 color="secondary"
                 onIonChange={(e) => {
-                  console.log(e.detail.value);
+                  setCost(e.detail.value as Cost);
                 }}
               >
                 <IonLabel slot="start">$</IonLabel>
@@ -160,7 +192,9 @@ const RecipeSearch: React.FC = () => {
               </IonRange>
             </IonItem>
           </div>
-          <IonButton color="success">Find Recipes</IonButton>
+          <IonButton color="success" onClick={findRecipe}>
+            Find Recipes
+          </IonButton>
         </div>
       </IonContent>
     </IonPage>
