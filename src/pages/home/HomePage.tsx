@@ -66,12 +66,16 @@ const HomePage: React.FC = () => {
             </IonAvatar>
           ))}
         </div>
+<<<<<<< HEAD
 
         {loading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={user} recipe={recipes[0]}></RecipeCard>)}
 
         {/* {loading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={user}></RecipeCard>)} */}
         {loading ? (<IonSpinner></IonSpinner>) : recipes.map((r) => <RecipeCard user={user} recipe={r}></RecipeCard>)}
 
+=======
+        {loading ? (<IonSpinner></IonSpinner>) : recipes.map((r, i) => <RecipeCard key={i} user={user} recipe={r}></RecipeCard>)}
+>>>>>>> 7c6487a1d3b9fb09b9852ec4c4b2568c98bd53fe
       </IonContent>
     </IonPage>
   );
