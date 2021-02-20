@@ -68,9 +68,10 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
 
   return (
     <div className="recipe-upload-container">
-      <div>
-        <IonItem>
-          Upload an image
+      <div className="image-upload-container">
+      {!!img && <img src={img} />}
+
+        <div className="image-upload-input-container">
           <input
             name="photo"
             type="file"
@@ -79,10 +80,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
               setImg(URL.createObjectURL(e.target.files![0]));
             }}
           />
-          <IonImg src={img} />
-        </IonItem>
+        </div>
       </div>
-      <div>
+      <div className="desc-input">
         <IonItem>
           <IonTextarea
             placeholder="What's your recipe name"
@@ -183,34 +183,42 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       </div>
       <div className="steps-container">
         {steps.map((item, index) => (
-          <IonInput
-            key={index}
-            placeholder={`Enter step ${index + 1}`}
-            onIonChange={(e) => {
-              const cpy = [...steps];
-              cpy[index] = e.detail.value!;
-              setSteps(cpy);
-            }}
-            value={item}
-          />
+          <div className="step-inner-container" key={index}>
+            <IonInput
+              key={index}
+              placeholder={`Enter step ${index + 1}`}
+              onIonChange={(e) => {
+                const cpy = [...steps];
+                cpy[index] = e.detail.value!;
+                setSteps(cpy);
+              }}
+              value={item}
+            />
+            {!!index && (
+              <IonButton
+                fill="clear"
+                color="danger"
+                onClick={() => {
+                  setSteps(steps.filter((_, i) => i !== index))
+                }}
+                size="small"
+              >
+                <IonIcon slot="icon-only" icon={close}></IonIcon>
+              </IonButton>
+            )}
+          </div>
         ))}
         <IonButton
+          color="dark"
+          fill="outline"
+          expand="block"
           onClick={() => {
             setSteps([...steps, ""]);
           }}
         >
           Add new step
         </IonButton>
-        <IonButton
-          color="danger"
-          onClick={() => {
-            const cpy = [...steps];
-            if (cpy.length) cpy.pop();
-            setSteps(cpy);
-          }}
-        >
-          Remove step
-        </IonButton>
+        {/* */}
       </div>
       <div>
         <IonList>
