@@ -7,12 +7,14 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { navigate } from "ionicons/icons";
+import React, { useEffect, useState } from "react";
 import { useData } from "../../components/Data/DataContext";
-import { getAllRecipes, getFollowers, getRecipes } from "../../firebase/api";
-import { Recipe, User } from "../../firebase/models";
-import "./HomePage.css";
 import RecipeCard from "../../components/recipe/RecipeCard";
+import { getAllRecipes, getFollowers } from "../../firebase/api";
+import { Recipe, User } from "../../firebase/models";
+import ProfileVisitor from "../profile_visitor/ProfileVisitor";
+import "./HomePage.css";
 
 const MockFollowers = [
   "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y",
@@ -28,7 +30,9 @@ const MockFollowers = [
 
 const HomePage: React.FC = () => {
   const { user, loading } = useData();
+  const [ visitorId, setVisitorId ] = useState("");
   const [followers, setFollowers] = useState([] as any[]);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const [recipes, setRecipes] = useState([] as Recipe[]);
 
   useEffect(() => {
@@ -49,23 +53,39 @@ const HomePage: React.FC = () => {
     unsubscribe();
   }, [user, loading]);
 
+  const goToProfile = (f: {id: string, photoURL: string}) => {
+    setVisitorId(f.id);
+    setShowProfileModal(true);
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle color="primary" class="ion-text-west">Munchify</IonTitle>
+          <IonTitle color="primary" class="ion-text-west">
+            Munchify
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+      <ProfileVisitor
+        userId={visitorId}
+        showModal={showProfileModal}
+        onSuccess={() => setShowProfileModal(false)}
+      />
         <h4 className="home-page-followers-title">Followers:</h4>
         <div className="followers-icon-container">
-          {(!!followers.length ? followers : MockFollowers).map((f, i) => (
-            <IonAvatar key={i}>
-              <img src={f.photoURL ?? f} />
+          {followers.map((f, i) => (
+            <IonAvatar key={i} onClick={goToProfile.bind(null, f)}>
+              <img src={f.photoURL} />
             </IonAvatar>
           ))}
         </div>
-        {loading ? (<IonSpinner></IonSpinner>) : recipes.map((r, i) => <RecipeCard key={i} recipe={r}></RecipeCard>)}
+        {loading ? (
+          <IonSpinner></IonSpinner>
+        ) : (
+          recipes.map((r, i) => <RecipeCard key={i} recipe={r}></RecipeCard>)
+        )}
       </IonContent>
     </IonPage>
   );

@@ -35,7 +35,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
         <ProfileVisitor
-        user={user}
+        userId={user.id}
         showModal={showNextModal}
         onSuccess={() => setShowNextModal(false)}
       />
