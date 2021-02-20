@@ -22,7 +22,7 @@ const TabRoot: React.FC = () => {
           <HomePage />
         </Route>
         <Route path="/main/search">
-          <RecipeUpload />
+          <SearchPage />
         </Route>
         <Redirect to="/main/home" from="/main" exact />
       </IonRouterOutlet>
