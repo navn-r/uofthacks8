@@ -10,12 +10,8 @@ import {
 import { navigate } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useData } from "../../components/Data/DataContext";
-<<<<<<< HEAD
-import { getAllRecipes, getFollowed, getRecipes } from "../../firebase/api";
-=======
 import RecipeCard from "../../components/recipe/RecipeCard";
 import { getAllRecipes, getFollowers } from "../../firebase/api";
->>>>>>> 1294d2437a662132306dfbb41b3e5375591cda75
 import { Recipe, User } from "../../firebase/models";
 import ProfileVisitor from "../profile_visitor/ProfileVisitor";
 import "./HomePage.css";
@@ -30,7 +26,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     if (loading) return;
     const unsubscribe = async () => {
-      const followers = await getFollowed(user.followingIds);
+      const followers = await getFollowers(user.followingIds);
       const recipes = await getAllRecipes();
       setRecipes(recipes);
       setFollowers(
@@ -69,13 +65,8 @@ const HomePage: React.FC = () => {
         <h4 className="home-page-followers-title">Followers:</h4>
         <div className="followers-icon-container">
           {followers.map((f, i) => (
-<<<<<<< HEAD
-            <IonAvatar key={i}>
-              <img src={f.photoURL ?? f} />
-=======
             <IonAvatar key={i} onClick={goToProfile.bind(null, f)}>
               <img src={f.photoURL} />
->>>>>>> 1294d2437a662132306dfbb41b3e5375591cda75
             </IonAvatar>
           ))}
         </div>
