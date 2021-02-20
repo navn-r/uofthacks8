@@ -5,20 +5,20 @@
   margin: 1rem 1.25rem;
 }
 
-.user-info .title p {
+.user-info .profile-title p {
   color: #dadada;
   margin-left: 5px;
 }
 
-.user-info .title ion-text {
-  font-size: 36px;
+.user-info .profile-title ion-text {
+  font-size: 30px;
 }
 
 .white {
   color: #ffffff;
 }
-  
-.user-info .title {
+
+.user-info .profile-title {
   margin-left: 13vw;
   display: flex;
   flex-direction: column;

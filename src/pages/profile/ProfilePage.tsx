@@ -116,7 +116,7 @@ const ProfilePage: React.FC = () => {
             <IonAvatar>
               <img src={authUser.photoURL} />
             </IonAvatar>
-            <div className="white title">
+            <div className="white profile-title">
               <IonText color="light">{authUser.displayName}</IonText>
               <p>{authUser.email}</p>
             </div>
