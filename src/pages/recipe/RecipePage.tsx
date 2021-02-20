@@ -83,11 +83,9 @@ const RecipePage: React.FC<RecipePageProps> = ({
           <IonText color="primary">Ingredients</IonText>
           <div className="ingredients">
             {recipe.foodItems.map((r) => (
-              <IonItem>
+              <IonItem key={r}>
                 <IonCheckbox />
-                <div key={r} className="ingredients-tag">
-                  {r}
-                </div>
+                <div className="ingredients-tag">{r}</div>
               </IonItem>
             ))}
           </div>
@@ -108,7 +106,11 @@ const RecipePage: React.FC<RecipePageProps> = ({
         </div>
         <div className="nutrition">
           <IonText color="primary">Nutritional Facts</IonText>
-          <p>{"Serv. Size: 1 slice (99g), Servings Per Container: 8, Amount Per Serving: Calories 340, Cal from Fat 220, Cal from Sat Fat 120, Total Fat 25g (38% DV), Sat Fat 14g (68%), Trans Fat 1g, Polyunsat Fat 1.5g, Monounsat Fat 7g, Cholest 130mg (43% DV), Sodium 230mg (10% DV), Potassium 115mg (3% DV), Total Carb 24g (8%), Dietary Fiber 1g (4%), Sugars 21g, Sugar Alc 0g, Other Carb 0g, Protein 6g, Vitamin A (60% DV), Vitamin C (0% DV), Calcium (8% DV), Iron (2% DV), Vitamin D (2% DV), Vitamin E (0% DV), Thiamin (2% DV), Riboflavin (15% DV), Niacin (2% DV), Vitamin B6 (2% DV). Percent Daily Values (DV) are based on a 2,000 calorie diet."}</p>
+          <p>
+            {
+              "Serv. Size: 1 slice (99g), Servings Per Container: 8, Amount Per Serving: Calories 340, Cal from Fat 220, Cal from Sat Fat 120, Total Fat 25g (38% DV), Sat Fat 14g (68%), Trans Fat 1g, Polyunsat Fat 1.5g, Monounsat Fat 7g, Cholest 130mg (43% DV), Sodium 230mg (10% DV), Potassium 115mg (3% DV), Total Carb 24g (8%), Dietary Fiber 1g (4%), Sugars 21g, Sugar Alc 0g, Other Carb 0g, Protein 6g, Vitamin A (60% DV), Vitamin C (0% DV), Calcium (8% DV), Iron (2% DV), Vitamin D (2% DV), Vitamin E (0% DV), Thiamin (2% DV), Riboflavin (15% DV), Niacin (2% DV), Vitamin B6 (2% DV). Percent Daily Values (DV) are based on a 2,000 calorie diet."
+            }
+          </p>
         </div>
       </IonContent>
     </IonModal>
