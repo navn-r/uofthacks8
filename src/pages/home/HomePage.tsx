@@ -63,7 +63,7 @@ const HomePage: React.FC = () => {
             </IonAvatar>
           ))}
         </div>
-        {loading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={user}></RecipeCard>)}
+        {/* {loading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={user}></RecipeCard>)} */}
       </IonContent>
     </IonPage>
   );
