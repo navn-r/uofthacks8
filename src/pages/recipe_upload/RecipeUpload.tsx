@@ -11,8 +11,10 @@ import {
   IonLabel,
   IonSearchbar,
   IonInput,
+  IonCheckbox,
+  IonRange,
 } from "@ionic/react";
-import { foods } from "../../firebase/constants";
+import { foods, tags } from "../../firebase/constants";
 import React from "react";
 import "./RecipeUpload.css";
 
@@ -24,11 +26,16 @@ const RecipeUpload: React.FC = () => {
   const [amounts, setAmounts] = React.useState<string[]>([]);
   const [measure, setMeasure] = React.useState<string[]>([]);
   const [steps, setSteps] = React.useState<string[]>([""]);
+  const [tagItems, setTagItems] = React.useState<boolean[]>(
+    Array(tags.length).fill(false)
+  );
   return (
-    <IonPage>
+    <IonPage className="page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-west" color="primary">Munchify</IonTitle>
+          <IonTitle class="ion-text-west" color="primary">
+            Munchify
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -93,7 +100,7 @@ const RecipeUpload: React.FC = () => {
                     }}
                   />
                   <IonInput
-                    value={amounts[index]}
+                    value={measure[index]}
                     placeholder={"g"}
                     onIonChange={(e) => {
                       const cpy = [...measure];
@@ -145,6 +152,38 @@ const RecipeUpload: React.FC = () => {
             Remove step
           </IonButton>
         </div>
+        <div>
+          Tags
+          <IonList>
+            <div className="taglist">
+              {tags.map((item, index) => {
+                return (
+                  <IonItem key={item}>
+                    <IonLabel>{item}</IonLabel>
+                    <IonCheckbox
+                      onClick={() => {
+                        const cpy = [...tagItems];
+                        cpy[index] = !cpy[index];
+                        setTagItems(cpy);
+                      }}
+                    />
+                  </IonItem>
+                );
+              })}
+            </div>
+          </IonList>
+        </div>
+        <div>
+          Cost
+          <IonItem>
+            <IonRange min={1} max={4} step={1} snaps={true} color="secondary">
+              <IonLabel slot="start">$</IonLabel>
+              <IonLabel slot="end">$$$$</IonLabel>
+            </IonRange>
+          </IonItem>
+        </div>
+
+        <IonButton>Make Recipe</IonButton>
       </IonContent>
     </IonPage>
   );
