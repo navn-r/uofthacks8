@@ -4,6 +4,8 @@ import {
   IonContent,
   IonHeader,
   IonInput,
+  IonItem,
+  IonList,
   IonPage,
   IonSpinner,
   IonTitle,
@@ -115,6 +117,15 @@ const ProfilePage: React.FC = () => {
             placeholder="Search..."
             onIonChange={(e) => setSearchUser(e.detail.value!)}
           ></IonInput>
+          <IonList>
+            {allUsers
+              .filter((user) => {
+                return user.displayName.includes(searchUser);
+              })
+              .map((user) => (
+                <IonItem key={user.displayName}>{user.displayName}</IonItem>
+              ))}
+          </IonList>
         </div>
         <div className="item-divider"></div>
         {dataLoading ? (
