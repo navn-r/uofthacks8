@@ -48,7 +48,7 @@ interface RecipeCardProps {
             <h6>Tags:</h6>
             <br></br>
             <ul>
-              {recipe.tags.map(tag => (<li>{tag}</li>))}
+              {recipe.tags.map((tag, i) => (<li key={i}>{tag}</li>))}
             </ul>
           </div>
           <IonCardContent>
