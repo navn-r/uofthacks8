@@ -9,12 +9,11 @@ import {
 import { useCallback } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../components/Auth/AuthProvider";
-import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
 
 const Tab1: React.FC = () => {
   const history = useHistory();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -36,10 +35,14 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Tab 1</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
         <IonButton mode="ios" onClick={onLogout} shape="round" color="primary">
           Sign Out
         </IonButton>
+        <div>
+        {user.uid} <br/>
+        {user.displayName} <br/>
+        {user.email}
+        </div>
       </IonContent>
     </IonPage>
   );

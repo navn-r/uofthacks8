@@ -2,14 +2,25 @@ import firebase from "firebase/app";
 import { db, auth } from "./config";
 import { Recipe, User } from "./models";
 
-const uId = (auth.currentUser as firebase.User).uid;
 const userCollection = "users";
 const recipeCollection = "recipes";
-const foodItemCollection = "fooditems";
-const foodCollection = "foods";
-const foodNutrientCollection = "foodnutrients";
-const nutrientCollection = "nutrients";
-export const addFollower = (followerId: string) => {
+
+const INITIAL_USER: User = {
+  followerIds: [],
+  followingIds: [],
+  recipeIds: [],
+};
+
+export const initNewUser = (id: string): Promise<void> => {
+  return db
+    .collection(userCollection)
+    .doc(id)
+    .set(INITIAL_USER, { merge: true });
+};
+
+export const addFollower = (uid: string, followerId: string) => {
+  const uId = (auth.currentUser as firebase.User).uid;
+
   db.collection(userCollection)
     .doc(uId)
     .update({
@@ -24,6 +35,8 @@ export const addFollower = (followerId: string) => {
     });
 };
 export const addRecipe = (recipe: Recipe) => {
+  const uId = (auth.currentUser as firebase.User).uid;
+
   const rId = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   db.collection(recipeCollection).doc(rId).set(recipe);
   db.collection(userCollection)

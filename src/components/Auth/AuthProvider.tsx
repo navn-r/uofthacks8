@@ -19,7 +19,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((newUser) => {
-      console.log(!!newUser);
       setAuthState({
         user: newUser,
         authenticated: !!newUser,
@@ -32,11 +31,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const login = async (cb: Function) => {
     try {
-      await Promise.all([
-        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL),
-        auth.signInWithPopup(googleAuthProvider),
-      ]);
-      cb();
+      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      const res = await auth.signInWithPopup(googleAuthProvider);
+      cb(res);
     } catch (err) {
       return console.error(err);
     }
@@ -52,6 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const value = {
+    userId: authState.user?.uid,
     ...authState,
     login,
     logout,
