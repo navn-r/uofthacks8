@@ -35,3 +35,8 @@
 .ingredient-item-row ion-button {
   height: 2rem;
 }
+
+.recipe-upload-container {
+  height: 100%;
+  overflow-y: scroll;
+}
