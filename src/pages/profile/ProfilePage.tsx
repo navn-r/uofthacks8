@@ -73,6 +73,10 @@ const ProfilePage: React.FC = () => {
             <IonSpinner />
           ) : (
             <>
+            <div className="follower-box">
+                <h4>{(dataUser as User).recipeIds.length}</h4>
+                <p>Recipes</p>
+              </div>
               <div className="follower-box">
                 <h4>{(dataUser as User).followerIds.length}</h4>
                 <p>Followers</p>

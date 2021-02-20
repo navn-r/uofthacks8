@@ -34,7 +34,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
             </div>
           </div>
         </IonCardTitle>
-        <img src={recipe.url}></img>
+        <img src={!!recipe ? recipe.url : "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"}></img>
       </IonCardHeader>
       <p className="recipe-desc">{recipe.desc}</p>
       <div className="tags-container">
