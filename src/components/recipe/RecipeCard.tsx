@@ -29,7 +29,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
               <img src={user.photoURL} />
             </IonAvatar>
             <div className="info-title">
-              <h3>{"RECIPE NAME"}</h3>
+              <h3>{recipe.title}</h3>
               <p>{user.displayName}</p>
             </div>
           </div>
