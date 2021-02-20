@@ -43,7 +43,7 @@ interface RecipeCardProps {
             </IonCardTitle>
               <img src={recipe.url}></img>
           </IonCardHeader>
-          <h6>{recipe.instructions}</h6>
+          <h6>{recipe.desc}</h6>
           <div>
             <h6>Tags:</h6>
             <br></br>
