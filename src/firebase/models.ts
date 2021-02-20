@@ -3,29 +3,11 @@ export interface User {
   followingIds: string[];
   recipeIds: string[];
 }
-export interface Food {
-  name: string;
-}
-export interface FoodItem {
-  foodId: string;
-  amount: number;
-  measureType: string;
-}
 export interface Recipe {
-  foodIds: FoodItem[];
+  foodItems: string[];
   cost: "cheap" | "normal" | "expensive" | "high end";
   desc: string;
   instructions: string[];
   tags: string[];
   url: string;
-}
-
-export interface FoodNutrient {
-  foodId: string;
-  nutrientId: string;
-  amount: number;
-}
-export interface Nutrient {
-  name: string;
-  unitName: string;
 }
