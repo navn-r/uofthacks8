@@ -75,7 +75,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               <>
                 <div className="follower-box">
                   <h4>{(profileUser as User).recipeIds.length}</h4>
-                  <p>Recipes</p>
+                  <p>Munchies</p>
                 </div>
                 <div className="follower-box">
                   <h4>{(profileUser as User).followerIds.length}</h4>
