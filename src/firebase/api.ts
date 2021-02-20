@@ -113,7 +113,7 @@ export const makeRecipe = async (recipe: {
   return (reader.onloadend = function () {
     const newRecipe: Recipe = {
       title: recipe.title,
-      foodItems: recipe.foodItems.map((name, index) => {return {name, amount: recipe.amounts[index], unit: recipe.measures[index]}}),
+      foodItems: recipe.foodItems.map((name, index) => {return {name, amount: recipe.amounts[index] ?? 0, unit: recipe.measures[index] ?? 'grams'}}),
       desc: recipe.desc,
       instructions: recipe.instructions,
       cost: (cost ?? "cheap") as Cost,
