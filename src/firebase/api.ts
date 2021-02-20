@@ -99,14 +99,21 @@ export const makeRecipe = async (recipe : {
   }) : Promise<any> =>
   {
   const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
-  const newRecipe : RecipeTemp = {...recipe, 
-    cost : cost, 
-    tags: tags.filter((tag, i) => {
-      if(recipe.tags[i]){
-        return true;
+  
+  var reader = new FileReader();
+  reader.readAsDataURL(await fetch(recipe.url).then(r => r.blob())); 
+  return reader.onloadend = function() {
+     const newRecipe : RecipeTemp = {...recipe, 
+      cost : cost, 
+      tags: tags.filter((tag, i) =>  recipe.tags[i]),
+      url : reader.result as string
       }
-      return false;
-    })
-    }
-    return addRecipe(newRecipe as Recipe)
+      console.log(reader.result);
+      
+      return addRecipe(newRecipe as Recipe)
   }
+  
+
+
+}
+    
