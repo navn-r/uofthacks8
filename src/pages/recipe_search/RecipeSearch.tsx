@@ -111,10 +111,10 @@ const RecipeSearch: React.FC = () => {
             />
             <div className="food-items">
               {foodItems.length <= 10 &&
-                foodItems.map((item) => {
+                foodItems.map((item, i) => {
                   return (
                     <div
-                      key={item}
+                      key={i}
                       className="food-item-tag"
                       onClick={() => {
                         if (!ingredients.includes(item))
@@ -157,8 +157,8 @@ const RecipeSearch: React.FC = () => {
             <div className="taglist">
               {tags.map((item, index) => {
                 return (
-                  <div className="tag">
-                    <IonItem key={item}>
+                  <div className="tag" key={item}>
+                    <IonItem>
                       <IonLabel>{item}</IonLabel>
                       <IonCheckbox
                         onClick={() => {
