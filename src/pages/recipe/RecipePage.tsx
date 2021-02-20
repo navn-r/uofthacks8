@@ -1,46 +1,61 @@
 import {
   IonAvatar,
+  IonButton,
   IonContent,
   IonHeader,
-  IonPage,
+  IonIcon,
+  IonModal,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useHistory } from "react-router";
-import { useAuth } from "../../components/Auth/AuthProvider";
+import { close } from "ionicons/icons";
+import React from "react";
 import { Recipe, User } from "../../firebase/models";
 import "./RecipePage.css";
 
-interface RecipeCardProps {
+interface RecipePageProps {
   user: User;
   recipe: Recipe;
+  showModal: boolean;
+  onSuccess: () => void;
 }
 
-
-const RecipePage: React.FC<RecipeCardProps> = ({ user, recipe }) => {
-  const history = useHistory();
-  const { logout, user: authUser } = useAuth();
-
+const RecipePage: React.FC<RecipePageProps> = ({
+  user,
+  recipe,
+  showModal,
+  onSuccess,
+}) => {
   return (
-    <IonPage>
+    <IonModal isOpen={showModal}>
       <IonHeader>
         <IonToolbar>
-        <IonTitle color="primary" class="ion-text-west">Munchify</IonTitle>
+          <IonTitle color="primary" class="ion-text-west">
+            Munchify
+          </IonTitle>
+          <IonButton
+            fill="clear"
+            color="danger"
+            onClick={onSuccess}
+            size="small"
+          >
+            <IonIcon slot="icon-only" icon={close}></IonIcon>
+          </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <div className="user-info">
           <IonAvatar>
-            <img src={authUser.photoURL} />
+            <img src={user.photoURL} />
           </IonAvatar>
           <div className="info-title">
             <h3>{"RECIPE NAME"}</h3>
-            <p>{authUser.displayName}</p>
+            <p>{user.displayName}</p>
           </div>
         </div>
         <img src={recipe.url}></img>
       </IonContent>
-    </IonPage>
+    </IonModal>
   );
 };
 
