@@ -32,7 +32,9 @@ const RecipePage: React.FC<RecipePageProps> = ({
   onSuccess,
 }) => {
   const [showNextModal, setShowNextModal] = useState(false);
-
+  const carbs = Math.floor(Math.random()*20) + 20;
+  const fat = Math.floor(Math.random() * 20) + 20;
+  const protein = Math.floor(Math.random() * 20) + 10;
   const onClickModal = (e:any) =>{
     if(user.id !== getId()){
       setShowNextModal(true);
@@ -82,16 +84,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
           <IonText color="primary">Description</IonText>
           <p>{recipe.desc}</p>
         </div>
-        <div className="property">
-          <IonText color="primary">Tags</IonText>
-          <div className="inner">
-            {recipe.tags.map((r) => (
-              <div key={r} className="recipe-tag">
-                {r}
-              </div>
-            ))}
-          </div>
-        </div>
+
         <div className="property">
           <IonText color="primary">Ingredients</IonText>
           <div className="ingredients">
@@ -103,24 +96,35 @@ const RecipePage: React.FC<RecipePageProps> = ({
             ))}
           </div>
         </div>
+
         <div className="property">
           <IonText color="primary">Steps</IonText>
           <div className="ingredients">
             <ol>
               {recipe.instructions.map((r) => (
-                <li key={r}>
+                <li key={r} className="steps">
                   <div className="steps-tag">{r}</div>
                 </li>
               ))}
             </ol>
           </div>
         </div>
+        <div className="property">
+          <IonText color="primary">Tags</IonText>
+          <div className="inner">
+            {recipe.tags.map((r) => (
+              <div key={r} className="recipe-tag">
+                {r}
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="nutrition">
           <IonText color="primary">Nutritional Facts</IonText>
-          <p>
-            {
-              "Serv. Size: 1 slice (99g), Servings Per Container: 8, Amount Per Serving: Calories 340, Cal from Fat 220, Cal from Sat Fat 120, Total Fat 25g (38% DV), Sat Fat 14g (68%), Trans Fat 1g, Polyunsat Fat 1.5g, Monounsat Fat 7g, Cholest 130mg (43% DV), Sodium 230mg (10% DV), Potassium 115mg (3% DV), Total Carb 24g (8%), Dietary Fiber 1g (4%), Sugars 21g, Sugar Alc 0g, Other Carb 0g, Protein 6g, Vitamin A (60% DV), Vitamin C (0% DV), Calcium (8% DV), Iron (2% DV), Vitamin D (2% DV), Vitamin E (0% DV), Thiamin (2% DV), Riboflavin (15% DV), Niacin (2% DV), Vitamin B6 (2% DV). Percent Daily Values (DV) are based on a 2,000 calorie diet."
-            }
+          <p>Protein: {protein} grams</p>
+          <p>Fat: {fat} grams</p>
+          <p>Carbohydrates: {carbs} grams
+
           </p>
         </div>
       </IonContent>

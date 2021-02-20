@@ -94,3 +94,25 @@
   margin: 1vh 0vw;
   background-color:#3880ff;
 }
+.title-container {
+  display: grid;
+  grid-template-columns: auto 3rem;
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+}
+
+.title-container h4 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-align: left !important;
+  margin: 0;
+}
+
+.title-container ion-button {
+  margin: 0;
+}
+
+.avatar-name {
+  margin-left: 0.5rem;
+}
