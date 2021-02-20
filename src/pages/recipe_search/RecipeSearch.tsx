@@ -74,8 +74,6 @@ const RecipeSearch: React.FC = () => {
         if (!hasAllIngredients) break;
         filteredRecipes.push(recipe);
       }
-      console.log(filteredRecipes);
-
       setShowRecipes(filteredRecipes.slice(0, 10));
     });
   };
