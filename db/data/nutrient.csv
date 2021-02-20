@@ -1,14 +1,11 @@
 id,name,unit_name
 1008,Energy,KCAL
-1062,Energy,kJ
 1004,Total Fat,G
 1258,"Saturated fat",G
 1257,"Trans fat",G
 1253,Cholesterol,MG
 1093,"Sodium",MG
-1005,"Carbohydrate, by difference",G
-1050,"Carbohydrate, by summation",G
-1072,"Carbohydrate, other",G
+1005,"Carbohydrate",G
 1079,"Total Dietary Fiber",G
 2000,"Total Sugar",G
 1235,"Added Sugars",G
