@@ -89,35 +89,39 @@ interface RecipeTemp {
   instructions: string[];
   tags: string[]; // index of which tags are used
   url: string;
+  title: string;
+  userId: string;
 }
 
-export const makeRecipe = async (recipe : {
-    foodItems : string[],
-    cost: number;
-    desc: string;
-    instructions: string[];
-    tags: boolean[]; // index of which tags are used
-    url: string;
-    title: string
-  }) : Promise<any> =>
-  {
-  const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
-  
+export const makeRecipe = async (recipe: {
+  foodItems: string[];
+  cost: number;
+  desc: string;
+  instructions: string[];
+  tags: boolean[]; // index of which tags are used
+  url: string;
+  title: string;
+}): Promise<any> => {
+  const cost = ["cheap", "normal", "expensive", "high end"][recipe.cost - 1];
+
   var reader = new FileReader();
-  reader.readAsDataURL(await fetch(recipe.url).then(r => r.blob())); 
-  return reader.onloadend = function() {
+  reader.readAsDataURL(await fetch(recipe.url).then((r) => r.blob()));
+  return (reader.onloadend = function () {
     console.log(recipe.tags);
-     const newRecipe : RecipeTemp = {...recipe, 
-      cost : cost ?? "cheap", 
+    const newRecipe: RecipeTemp = {
+      ...recipe,
+      cost: cost ?? "cheap",
       tags: TAGS.filter((_, i) => !!recipe.tags[i]),
-      url : reader.result as string
-      }
-      console.log(newRecipe);      
-      return addRecipe(newRecipe as Recipe)
-  }
-}
+      url: reader.result as string,
+      userId: getId(),
+    };
+
+    return addRecipe(newRecipe as Recipe);
+  });
+};
 
 export const getAllRecipes = async (): Promise<any> => {
-  return (await db.collection(recipeCollection).get()).docs.map(doc => doc.data());
+  return (await db.collection(recipeCollection).get()).docs.map((doc) =>
+    doc.data()
+  );
 };
-    

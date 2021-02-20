@@ -1,0 +1,11 @@
+.property{
+    margin: 15px 15px 0px;
+}
+
+.ingredients-tag {
+    padding: 0.2rem 0.5rem 0rem;
+    background-color: var(--ion-color-medium);
+    border-radius: 5px;
+    margin: 0.25rem;
+    color: var(--ion-color-light);
+}
