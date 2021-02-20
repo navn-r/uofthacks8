@@ -17,7 +17,7 @@ const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ showModal, onSuccess })
        <IonHeader>
          <IonToolbar>
             <IonButton fill="clear" color="danger" onClick={onSuccess} size="small"><IonIcon slot="icon-only" icon={close}></IonIcon></IonButton>
-           <IonTitle>Add Recipe</IonTitle>
+           <IonTitle>Add Munchie</IonTitle>
          </IonToolbar>
        </IonHeader>
        <IonContent>

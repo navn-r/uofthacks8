@@ -95,7 +95,7 @@ const ProfilePage: React.FC = () => {
             expand="block"
             color="primary"
           >
-            Add Recipe
+            Add Munchie
           </IonButton>
           <IonButton
             mode="ios"
@@ -116,7 +116,7 @@ const ProfilePage: React.FC = () => {
           <IonSpinner />
         ) : (
           <div className="user-recipes-container">
-            <h4>My Recipes</h4>
+            <h4>My Munchies</h4>
             {!!recipes &&
               recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
           </div>

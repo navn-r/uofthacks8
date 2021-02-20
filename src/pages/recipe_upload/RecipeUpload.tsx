@@ -284,7 +284,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         id="submit-button"
         onClick={() => recipeSubmit()}
       >
-        Make Recipe
+        Make Munchie
       </IonButton>
     </div>
   );
