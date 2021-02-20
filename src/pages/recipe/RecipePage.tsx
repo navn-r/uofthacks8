@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import { Recipe, User } from "../../firebase/models";
 import "./RecipePage.css";
 import ProfileVisitor from "../profile_visitor/ProfileVisitor"
-
+import {getId} from "../../firebase/api";
 interface RecipePageProps {
   user: User;
   recipe: Recipe;
@@ -32,6 +32,13 @@ const RecipePage: React.FC<RecipePageProps> = ({
   onSuccess,
 }) => {
   const [showNextModal, setShowNextModal] = useState(false);
+
+  const onClickModal = (e:any) =>{
+    if(user.id !== getId()){
+      setShowNextModal(true);
+    }
+  }
+
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
         <ProfileVisitor
@@ -61,7 +68,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
       <IonContent>
         <div className="user-info">
           <IonAvatar>
-            <img src={user.photoURL} onClick={(e) => setShowNextModal(true)}/>
+            <img src={user.photoURL} onClick={onClickModal}/>
           </IonAvatar>
           <div className="info-title">
             <h1>{recipe.title}</h1>
