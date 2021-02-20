@@ -8,9 +8,10 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./HomePage.css";
-import RecipeCard from "../../components/recepie/RecipeCard";
+import RecipeCard from "../../components/recipe/RecipeCard";
 import { useData } from "../../components/Data/DataContext";
-
+import {getRecipe} from "../../firebase/api";
+import { useEffect } from "react";
 
 const MockFollowers = [
   'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
@@ -26,6 +27,7 @@ const MockFollowers = [
 
 const HomePage: React.FC = () => {
   const { user: dataUser, loading: dataLoading } = useData();
+  var recipe = await getRecipe(dataUser.recipeIds[0])
   return (
     <IonPage>
       <IonHeader>
@@ -33,8 +35,9 @@ const HomePage: React.FC = () => {
           <IonTitle class="ion-text-center">Munchify</IonTitle>
         </IonToolbar>
       </IonHeader>
-      {dataLoading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={dataUser}></RecipeCard>)}
+      
       <IonContent fullscreen>
+      
         <h4 className="home-page-followers-title">Followers:</h4>
         <div className="followers-icon-container">
           {MockFollowers.map((f, i) => (
@@ -43,6 +46,7 @@ const HomePage: React.FC = () => {
             </IonAvatar>
           ))}
         </div>
+        {dataLoading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={dataUser} recipe={recipe}></RecipeCard>)}
       </IonContent>
     </IonPage>
   );
