@@ -150,14 +150,14 @@ const RecipeSearch: React.FC = () => {
                 ))}
               </div>
           </div>
-          <div>
-            <IonList>
-              <div className="property">
-                <IonText color="primary">{"Tags"}</IonText>
-              </div>
-              <div className="taglist">
-                {tags.map((item, index) => {
-                  return (
+          <IonList>
+            <div className="property">
+              <IonText color="primary">{"Tags"}</IonText>
+            </div>
+            <div className="taglist">
+              {tags.map((item, index) => {
+                return (
+                  <div className="tag">
                     <IonItem key={item}>
                       <IonLabel>{item}</IonLabel>
                       <IonCheckbox
@@ -168,13 +168,15 @@ const RecipeSearch: React.FC = () => {
                         }}
                       />
                     </IonItem>
-                  );
-                })}
-              </div>
-            </IonList>
-          </div>
+                  </div>
+                );
+              })}
+            </div>
+          </IonList>
           <div>
-            <h4 className="cost-title">Cost</h4>
+            <div className="property">
+              <IonText color="primary">{"Cost"}</IonText>
+            </div>
             <IonItem>
               <IonRange
                 dualKnobs={true}
@@ -192,9 +194,11 @@ const RecipeSearch: React.FC = () => {
               </IonRange>
             </IonItem>
           </div>
-          <IonButton color="success" onClick={findRecipe}>
-            Find Recipes
-          </IonButton>
+          <div className="center">
+            <IonButton color="success" onClick={findRecipe}>
+              Find Recipes
+            </IonButton>
+          </div>
         </div>
       </IonContent>
     </IonPage>
