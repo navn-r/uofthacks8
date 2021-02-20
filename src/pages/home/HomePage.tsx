@@ -5,25 +5,21 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "./Tab2.css";
+import "./HomePage.css";
 
-const Tab2: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle class="ion-text-center">Home</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab2;
+export default HomePage;

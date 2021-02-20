@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import { useCallback } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../components/Auth/AuthProvider";
+import { useAuth } from "../../components/Auth/AuthProvider";
 import "./Tab1.css";
 
 const Tab1: React.FC = () => {
