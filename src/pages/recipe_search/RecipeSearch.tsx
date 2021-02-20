@@ -3,12 +3,15 @@ import {
   IonCheckbox,
   IonContent,
   IonIcon,
+  IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
   IonRange,
   IonSearchbar,
+  IonText,
+  IonTextarea,
 } from "@ionic/react";
 import { close } from "ionicons/icons";
 import React from "react";
@@ -32,18 +35,20 @@ const RecipeSearch: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <IonSearchbar
-            value={title}
-            placeholder="Search for recipes"
-            onIonChange={(e) => {
-              const input = e.detail.value!.trim().toLowerCase();
-              setTitle(input);
-            }}
-            showCancelButton="never"
-          />
+        <div className="property">
+          <IonText>{"Name"}</IonText>
         </div>
+        <IonItem>
+          <IonTextarea
+            placeholder="What's the recipe name"
+            value={title}
+            onIonChange={(e) => setTitle(e.detail.value!)}
+          ></IonTextarea>
+        </IonItem>
         <div className="recipe-upload-container">
+          <div className="property">
+            <IonText>{"Ingredients"}</IonText>
+          </div>
           <div>
             <IonSearchbar
               value={search}
@@ -80,14 +85,10 @@ const RecipeSearch: React.FC = () => {
                 })}
             </div>
             <IonList>
-              {!!ingredients.length && (
-                <div className="ingredient-titles-container">
-                  <p>Ingredient</p>
-                </div>
-              )}
-              <div className="ingredient-list">
+              {}
+              <div>
                 {ingredients.map((item, index) => (
-                  <div className="ingredient-item-row" key={item}>
+                  <div className="ingredients-tag" key={item}>
                     <IonLabel>{item}</IonLabel>
                     <IonButton
                       fill="clear"
