@@ -54,16 +54,14 @@ const HomePage: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      
       <IonContent fullscreen>
         <ProfileVisitor
           userId={visitorId}
           showModal={showProfileModal}
           onSuccess={() => setShowProfileModal(false)}
         />
-        <h4 className="home-page-followers-title">Munchers:</h4>
         <div className="followers-icon-container">
-          {followers.map((f, i) => (
+          {followers.filter(f => f.id !== user.id).map((f, i) => (
             <IonAvatar key={i} onClick={goToProfile.bind(null, f)}>
               <img src={f.photoURL} />
             </IonAvatar>

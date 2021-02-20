@@ -10,6 +10,8 @@
   overflow-x: scroll;
   display: flex;
   padding-left: 0.75rem;
+  margin: 2rem 0;
+  border-bottom: 1px solid var(--ion-color-medium);
 }
 
 .followers-icon-container ion-avatar {
