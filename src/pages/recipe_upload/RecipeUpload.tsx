@@ -10,15 +10,16 @@ import {
   IonSearchbar,
   IonTextarea,
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
 
 interface RecipeUploadProps {
   onSuccess: () => any;
+  showModal: boolean
 }
 
-const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
+const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => {
   const [desc, setDesc] = React.useState("");
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState(foods);
@@ -30,8 +31,23 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
     Array(tags.length).fill(false)
   );
   const [img, setImg] = React.useState("");
+
+  useEffect(() => {
+    const clearData = () => {
+      setDesc("");
+      setSearch("");
+      setFoodItems(foods);
+      setIngredients([]);
+      setAmounts([]);
+      setMeasure([]);
+      setSteps([""]);
+      setTagItems(Array(tags.length).fill(false));
+    };
+    clearData();
+  }, [showModal]);
+
   return (
-    <>
+    <div className="recipe-upload-container">
       <div>
         <IonItem>
           Upload an image
@@ -190,7 +206,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
       <IonButton color="success" onClick={() => onSuccess()}>
         Make Recipe
       </IonButton>
-    </>
+    </div>
   );
 };
 
