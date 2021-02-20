@@ -31,11 +31,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const login = async (cb: Function) => {
     try {
-      await Promise.all([
-        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL),
-        auth.signInWithPopup(googleAuthProvider),
-      ]);
-      cb();
+      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      const res = await auth.signInWithPopup(googleAuthProvider);
+      cb(res);
     } catch (err) {
       return console.error(err);
     }
