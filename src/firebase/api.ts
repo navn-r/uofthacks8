@@ -74,3 +74,7 @@ export const getRecipe = async (uid: string): Promise<any> => {
     .get()
     .then((doc) => Promise.resolve(doc.exists ? doc.data() : null));
 };
+
+export const getRecipes = async (recipes: string[]): Promise<any> => {
+  return Promise.all(recipes.map(id => getRecipe(id)));
+};
