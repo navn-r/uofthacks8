@@ -3,6 +3,7 @@ import {
   IonButton,
   IonContent,
   IonHeader,
+  IonInput,
   IonPage,
   IonSpinner,
   IonTitle,
@@ -33,7 +34,6 @@ const ProfilePage: React.FC = () => {
   );
 
   const addRecipe = () => {
-    console.log("add recipe here");
     setShowModal(true);
   };
 
@@ -73,7 +73,7 @@ const ProfilePage: React.FC = () => {
             <IonSpinner />
           ) : (
             <>
-            <div className="follower-box">
+              <div className="follower-box">
                 <h4>{(dataUser as User).recipeIds.length}</h4>
                 <p>Recipes</p>
               </div>
@@ -107,14 +107,18 @@ const ProfilePage: React.FC = () => {
           </IonButton>
         </div>
         <div className="item-divider"></div>
+        <div className="user-recipes-container">
+          <h4>Find fellow Munchers</h4>
+          <IonInput placeholder="Search..."></IonInput>
+        </div>
+        <div className="item-divider"></div>
         {dataLoading ? (
           <IonSpinner />
         ) : (
           <div className="user-recipes-container">
             <h4>My Recipes</h4>
-            {!!recipes && recipes.map((r, i) => (
-              <RecipeCard recipe={r} key={i} />
-            ))}
+            {!!recipes &&
+              recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
           </div>
         )}
       </IonContent>
