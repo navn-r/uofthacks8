@@ -104,7 +104,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             </div>
             <div className="item-divider"></div>
             <div className="user-recipes-container">
-              <h4>My Recipes</h4>
+              <h4>{profileUser.displayName.split(" ")[0]}'s Munchies</h4>
               {!!recipes &&
                 recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
             </div>
