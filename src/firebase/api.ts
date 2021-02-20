@@ -6,6 +6,8 @@ const userCollection = "users";
 const recipeCollection = "recipes";
 
 const INITIAL_USER: User = {
+  photoURL: "",
+  displayName: "ur mom",
   followerIds: [],
   followingIds: [],
   recipeIds: [],
