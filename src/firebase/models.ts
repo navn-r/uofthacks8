@@ -9,7 +9,7 @@ export interface Food {
 export interface FoodItem {
   foodId: string;
   amount: number;
-  measureId: string;
+  measureType: string;
 }
 export interface Recipe {
   foodIds: FoodItem[];
@@ -28,7 +28,4 @@ export interface FoodNutrient {
 export interface Nutrient {
   name: string;
   unitName: string;
-}
-export interface MeasureUnit {
-  measureUnit: string;
 }
