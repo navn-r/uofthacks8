@@ -21,10 +21,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const [user, setUser] = useState(null as any);
 
   useEffect(() => {
-    (async () => {
+    const unsubscribe = async () => {
+      if(!!user) return;      
       setUser(await getUser(recipe.userId));
-    })();
-  }, [recipe]);
+    };
+    unsubscribe();
+  }, [user, recipe]);
 
   return !!user && !!recipe ? (
     <>
