@@ -34,7 +34,7 @@ const RecipeSearch: React.FC = () => {
     lower: number;
     upper: number;
   }
-  const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
+  const [cost, setCost] = React.useState<Cost>({ lower: 1, upper: 1 });
   const [title, setTitle] = React.useState("");
   const [showRecipes, setShowRecipes] = React.useState<Recipe[]>([]);
   const findRecipe = () => {
@@ -44,11 +44,12 @@ const RecipeSearch: React.FC = () => {
       for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i];
         if (!recipe.title.startsWith(title)) continue;
-        let hasTag = false;
+        let allTags = true;
         tagItems.forEach((tag) => {
-          if (tag) hasTag = true;
+          if (tag) allTags = false;
         });
-        if (hasTag) {
+        if (!allTags) {
+          let hasTag = false;
           for (let j = 0; j < recipe.tags.length; j++) {
             if (filteredTags.includes(recipe.tags[j])) {
               hasTag = true;
@@ -59,7 +60,7 @@ const RecipeSearch: React.FC = () => {
         }
         const costs = ["cheap", "normal", "expensive", "high end"].filter(
           (_, index) => {
-            return cost.lower <= index && index <= cost.upper;
+            return cost.lower <= index + 1 && index + 1 <= cost.upper;
           }
         );
         if (!costs.includes(recipe.cost)) break;
@@ -73,6 +74,8 @@ const RecipeSearch: React.FC = () => {
         if (!hasAllIngredients) break;
         filteredRecipes.push(recipe);
       }
+      console.log(filteredRecipes);
+
       setShowRecipes(filteredRecipes.slice(0, 10));
     });
   };
