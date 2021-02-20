@@ -7,6 +7,7 @@ export interface User {
   displayName: string;
 }
 export interface Recipe {
+  title: string;
   foodItems: string[];
   cost: "cheap" | "normal" | "expensive" | "high end";
   desc: string;
