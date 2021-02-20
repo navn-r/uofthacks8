@@ -4,10 +4,6 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonGrid,
-  IonRow,
-  IonItemDivider,
-  IonCol,
   IonButton,
   IonList,
   IonItem,
@@ -32,7 +28,7 @@ const RecipeUpload: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-center">Upload Recipe</IonTitle>
+          <IonTitle class="ion-text-west" color="primary">Munchify</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

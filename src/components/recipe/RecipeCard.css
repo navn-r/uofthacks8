@@ -1,0 +1,47 @@
+.recipe-desc {
+  width: 100%;
+  padding: 0 1rem;
+  color: var(--ion-color-dark);
+}
+
+.tags-container {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.tags-container .inner {
+  width: 100%;
+  display: flex;
+}
+
+.tags-container h6 {
+  color: var(--ion-color-dark);
+}
+
+.recipe-tag {
+  padding: 0.5rem;
+  background-color: var(--ion-color-medium);
+  border-radius: 5px;
+  margin: 0.25rem;
+  color: var(--ion-color-light);
+}
+
+.recipe-info {
+  grid-template-columns: 3rem auto !important;
+}
+
+.recipe-info ion-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 0.5rem 3rem rgba(0,0,0,.09), 0 0.15rem 0.5rem rgba(0,0,0,.085);
+}
+
+.recipe-info h3 {
+  font-size: 1.125rem;
+}
+
+.recipe-info p {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--ion-color-medium-shade);
+}
