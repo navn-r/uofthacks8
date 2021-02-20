@@ -8,6 +8,7 @@ import {
   IonList,
   IonRange,
   IonSearchbar,
+  IonText,
   IonTextarea,
 } from "@ionic/react";
 import { close } from "ionicons/icons";
@@ -72,6 +73,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
 
   return (
     <div className="recipe-upload-container">
+      <div className="property">
+        <IonText color="primary">{"Image"}</IonText>
+      </div>
       <div className="image-upload-container">
         {!!img && <img src={img} />}
 
@@ -87,6 +91,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         </div>
       </div>
       <div className="desc-input">
+        <div className="property">
+          <IonText color="primary">{"Name"}</IonText>
+        </div>
         <IonItem>
           <IonTextarea
             placeholder="What's your recipe name"
@@ -96,6 +103,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         </IonItem>
       </div>
       <div>
+        <div className="property">
+          <IonText color="primary">{"Description"}</IonText>
+        </div>
         <IonItem>
           <IonTextarea
             placeholder="Talk about your recipe here..."
@@ -105,6 +115,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         </IonItem>
       </div>
       <div>
+        <div className="property">
+          <IonText color="primary">{"Ingredients"}</IonText>
+        </div>
         <IonSearchbar
           value={search}
           placeholder="Search for ingredients"
@@ -226,7 +239,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       </div>
       <div>
         <IonList>
-          <h4 className="tags-title">Tags</h4>
+          <div className="property">
+            <IonText color="primary">{"Tags"}</IonText>
+          </div>
           <div className="taglist">
             {tags.map((item, index) => {
               return (
@@ -246,7 +261,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         </IonList>
       </div>
       <div>
-        <h4 className="cost-title">Cost</h4>
+        <div className="property">
+          <IonText color="primary">{"Cost"}</IonText>
+        </div>
         <IonItem>
           <IonRange
             min={1}

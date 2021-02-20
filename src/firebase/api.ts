@@ -14,7 +14,7 @@ const INITIAL_USER: User = {
   recipeIds: [],
 };
 
-const getId = () => (auth.currentUser as firebase.User).uid;
+export const getId = () => (auth.currentUser as firebase.User).uid;
 const generateId = () =>
   (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
