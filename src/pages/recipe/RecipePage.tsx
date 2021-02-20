@@ -16,6 +16,7 @@ import { close } from "ionicons/icons";
 import React, { useState } from "react";
 import { Recipe, User } from "../../firebase/models";
 import "./RecipePage.css";
+import ProfileVisitor from "../profile_visitor/ProfileVisitor"
 
 interface RecipePageProps {
   user: User;
@@ -30,9 +31,14 @@ const RecipePage: React.FC<RecipePageProps> = ({
   showModal,
   onSuccess,
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [showNextModal, setShowNextModal] = useState(false);
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
+        <ProfileVisitor
+        user={user}
+        showModal={showNextModal}
+        onSuccess={() => setShowNextModal(false)}
+      />
       <IonHeader>
         <IonToolbar>
           <div className="title">
@@ -55,7 +61,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
       <IonContent>
         <div className="user-info">
           <IonAvatar>
-            <img src={user.photoURL} />
+            <img src={user.photoURL} onClick={(e) => setShowNextModal(true)}/>
           </IonAvatar>
           <div className="info-title">
             <h1>{recipe.title}</h1>

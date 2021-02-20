@@ -15,7 +15,7 @@ import { useHistory } from "react-router";
 import RecipeCard from "../../components/recipe/RecipeCard";
 import { addFollower } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
-import "./ProfilePage.css";
+import "./ProfileVisitor.css";
 import { close } from "ionicons/icons";
 
 interface ProfilePageProps {
