@@ -30,3 +30,11 @@ export const foods = [
   "ricotta cheese",
   "mozzarella cheese",
 ];
+export const tags = [
+  "Vegan",
+  "Nut-free",
+  "Vegetarian",
+  "Lactose Intolerant",
+  "Healthy",
+  "Keto",
+];

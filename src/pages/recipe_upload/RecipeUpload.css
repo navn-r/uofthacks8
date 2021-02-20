@@ -1,3 +1,10 @@
 .ingredient-list {
   overflow-y: scroll;
 }
+.page {
+  overflow-y: scroll;
+}
+.taglist {
+  overflow-y: scroll;
+  height: 10em;
+}
