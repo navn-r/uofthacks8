@@ -79,11 +79,11 @@ const ProfilePage: React.FC = () => {
               </div>
               <div className="follower-box">
                 <h4>{(dataUser as User).followerIds.length}</h4>
-                <p>Followers</p>
+                <p>Munchers</p>
               </div>
               <div className="follower-box">
                 <h4>{(dataUser as User).followingIds.length}</h4>
-                <p>Following</p>
+                <p>Munching</p>
               </div>
             </>
           )}
