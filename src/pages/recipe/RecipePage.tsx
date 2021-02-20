@@ -88,10 +88,10 @@ const RecipePage: React.FC<RecipePageProps> = ({
         <div className="property">
           <IonText color="primary">Ingredients</IonText>
           <div className="ingredients">
-            {recipe.foodItems.map((r) => (
-              <IonItem key={r}>
+            {recipe.foodItems.map((r, i) => (
+              <IonItem key={i}>
                 <IonCheckbox />
-                <div className="ingredients-tag-1">{r}</div>
+                <div className="ingredients-tag-1">{r.amount} {r.unit} of {r.name}</div>
               </IonItem>
             ))}
           </div>

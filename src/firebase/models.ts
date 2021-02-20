@@ -6,10 +6,19 @@ export interface User {
   photoURL: string;
   displayName: string;
 }
+
+export interface FoodItem {
+  name: string;
+  amount: number | string;
+  unit: string;
+}
+
+export type Cost = "cheap" | "normal" | "expensive" | "high end";
+
 export interface Recipe {
   title: string;
-  foodItems: string[];
-  cost: "cheap" | "normal" | "expensive" | "high end";
+  foodItems: FoodItem[];
+  cost: Cost;
   desc: string;
   instructions: string[];
   tags: string[];
