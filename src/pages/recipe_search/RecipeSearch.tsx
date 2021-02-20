@@ -2,6 +2,7 @@ import {
   IonButton,
   IonCheckbox,
   IonContent,
+  IonHeader,
   IonIcon,
   IonInput,
   IonItem,
@@ -12,6 +13,8 @@ import {
   IonSearchbar,
   IonText,
   IonTextarea,
+  IonTitle,
+  IonToolbar,
 } from "@ionic/react";
 import { close } from "ionicons/icons";
 import React from "react";
@@ -34,9 +37,16 @@ const RecipeSearch: React.FC = () => {
 
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle color="primary" class="ion-text-west">
+            Munchify
+          </IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent fullscreen>
         <div className="property">
-          <IonText>{"Name"}</IonText>
+          <IonText color="primary">{"Name"}</IonText>
         </div>
         <IonItem>
           <IonTextarea
@@ -47,7 +57,7 @@ const RecipeSearch: React.FC = () => {
         </IonItem>
         <div className="recipe-upload-container">
           <div className="property">
-            <IonText>{"Ingredients"}</IonText>
+            <IonText color="primary">{"Ingredients"}</IonText>
           </div>
           <div>
             <IonSearchbar
@@ -84,32 +94,35 @@ const RecipeSearch: React.FC = () => {
                   );
                 })}
             </div>
-            <IonList>
-              {}
               <div>
                 {ingredients.map((item, index) => (
                   <div className="ingredients-tag" key={item}>
-                    <IonLabel>{item}</IonLabel>
-                    <IonButton
-                      fill="clear"
-                      color="danger"
-                      onClick={() => {
-                        setIngredients(
-                          ingredients.filter((_, i) => i !== index)
-                        );
-                      }}
-                      size="small"
-                    >
-                      <IonIcon slot="icon-only" icon={close}></IonIcon>
-                    </IonButton>
+                    <div className="itemName">
+                      <IonLabel>{item}</IonLabel>
+                    </div>
+                    <div className="closeButton">
+                      <IonButton
+                        fill="clear"
+                        color="danger"
+                        onClick={() => {
+                          setIngredients(
+                            ingredients.filter((_, i) => i !== index)
+                          );
+                        }}
+                        size="small"
+                      >
+                        <IonIcon slot="icon-only" icon={close}></IonIcon>
+                      </IonButton>
+                    </div>
                   </div>
                 ))}
               </div>
-            </IonList>
           </div>
           <div>
             <IonList>
-              <h4 className="tags-title">Tags</h4>
+              <div className="property">
+                <IonText color="primary">{"Tags"}</IonText>
+              </div>
               <div className="taglist">
                 {tags.map((item, index) => {
                   return (
