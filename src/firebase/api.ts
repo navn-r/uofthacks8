@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import { db, auth } from "./config";
-import { Recipe, User } from "./models";
+import { Cost, Recipe, User } from "./models";
 import { tags as TAGS } from "./constants";
 const userCollection = "users";
 const recipeCollection = "recipes";
@@ -87,7 +87,9 @@ interface RecipeTemp {
   cost: string;
   desc: string;
   instructions: string[];
-  tags: string[]; // index of which tags are used
+  tags: string[]; // index of which tags are used,
+  measures: string[];
+  amounts: string[];
   url: string;
   title: string;
   userId: string;
@@ -98,7 +100,9 @@ export const makeRecipe = async (recipe: {
   cost: number;
   desc: string;
   instructions: string[];
-  tags: boolean[]; // index of which tags are used
+  tags: boolean[]; // index of which tags are used,
+  measures: string[];
+  amounts: string[];
   url: string;
   title: string;
 }): Promise<any> => {
@@ -107,16 +111,17 @@ export const makeRecipe = async (recipe: {
   var reader = new FileReader();
   reader.readAsDataURL(await fetch(recipe.url).then((r) => r.blob()));
   return (reader.onloadend = function () {
-    console.log(recipe.tags);
-    const newRecipe: RecipeTemp = {
-      ...recipe,
-      cost: cost ?? "cheap",
+    const newRecipe: Recipe = {
+      title: recipe.title,
+      foodItems: recipe.foodItems.map((name, index) => {return {name, amount: recipe.amounts[index], unit: recipe.measures[index]}}),
+      desc: recipe.desc,
+      instructions: recipe.instructions,
+      cost: (cost ?? "cheap") as Cost,
       tags: TAGS.filter((_, i) => !!recipe.tags[i]),
       url: reader.result as string,
       userId: getId(),
-    };
-
-    return addRecipe(newRecipe as Recipe);
+    }
+    return addRecipe(newRecipe);
   });
 };
 

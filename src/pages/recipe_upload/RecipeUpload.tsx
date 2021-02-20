@@ -57,6 +57,8 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   const recipeSubmit = () => {
     const temp = {
       foodItems: ingredients,
+      amounts: amounts,
+      measures: measure,
       cost,
       desc,
       instructions: steps,

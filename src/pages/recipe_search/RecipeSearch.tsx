@@ -36,36 +36,36 @@ const RecipeSearch: React.FC = () => {
   const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
   const [title, setTitle] = React.useState("");
   const findRecipe = () => {
-    const filteredTags = tags.filter((_, index) => tagItems[index]);
-    getAllRecipes().then((recipes) => {
-      const filteredRecipes = [];
-      for (let i = 0; i < recipes.length; i++) {
-        const recipe = recipes[i];
-        if (!recipe.title.startsWith(title)) continue;
-        let hasTag = false;
-        for (let j = 0; j < recipe.tags.length; j++) {
-          if (filteredTags.includes(recipe.tags[j])) {
-            hasTag = true;
-            break;
-          }
-        }
-        if (!hasTag) continue;
-        const costs = ["cheap", "normal", "expensive", "high end"].filter(
-          (_, index) => {
-            return cost.lower <= index && index <= cost.upper;
-          }
-        );
-        if (!costs.includes(recipe.cost)) break;
-        let hasAllIngredients = true;
-        for (let j = 0; j < ingredients.length; j++) {
-          if (!recipe.foodItems.includes(ingredients[j]))
-            hasAllIngredients = false;
-        }
-        if (!hasAllIngredients) break;
-        filteredRecipes.push(recipe);
-      }
-      console.log(filteredRecipes);
-    });
+    // const filteredTags = tags.filter((_, index) => tagItems[index]);
+    // getAllRecipes().then((recipes) => {
+    //   const filteredRecipes = [];
+    //   for (let i = 0; i < recipes.length; i++) {
+    //     const recipe = recipes[i];
+    //     if (!recipe.title.startsWith(title)) continue;
+    //     let hasTag = false;
+    //     for (let j = 0; j < recipe.tags.length; j++) {
+    //       if (filteredTags.includes(recipe.tags[j])) {
+    //         hasTag = true;
+    //         break;
+    //       }
+    //     }
+    //     if (!hasTag) continue;
+    //     const costs = ["cheap", "normal", "expensive", "high end"].filter(
+    //       (_, index) => {
+    //         return cost.lower <= index && index <= cost.upper;
+    //       }
+    //     );
+    //     if (!costs.includes(recipe.cost)) break;
+    //     let hasAllIngredients = true;
+    //     for (let j = 0; j < ingredients.length; j++) {
+    //       if (!recipe.foodItems.includes(ingredients[j]))
+    //         hasAllIngredients = false;
+    //     }
+    //     if (!hasAllIngredients) break;
+    //     filteredRecipes.push(recipe);
+    //   }
+    //   console.log(filteredRecipes);
+    // });
   };
   return (
     <IonPage>
