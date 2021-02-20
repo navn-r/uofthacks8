@@ -1,10 +1,37 @@
-.ingredient-list {
-  overflow-y: scroll;
+.steps-container {
+  width: 95%;
+  margin: 0 auto;
 }
-.page {
-  overflow-y: scroll;
+
+.ingredient-titles-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 95%;
+  margin: 0 auto;
 }
-.taglist {
-  overflow-y: scroll;
-  height: 10em;
+
+.ingredient-titles-container p {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-content: inherit;
+}
+
+.ingredient-item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 2.5rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.ingredient-item-row * {
+  display: flex;
+  align-items: center;
+}
+
+.ingredient-item-row ion-button {
+  height: 2rem;
 }

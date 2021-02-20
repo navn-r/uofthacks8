@@ -10,7 +10,6 @@ import { Redirect, Route } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import ProfilePage from "./profile/ProfilePage";
 import SearchPage from "./search/SearchPage";
-import RecipeUpload from "./recipe_upload/RecipeUpload";
 const TabRoot: React.FC = () => {
   return (
     <IonTabs>

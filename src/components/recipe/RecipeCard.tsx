@@ -5,8 +5,9 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import React from "react";
+import React, { useState } from "react";
 import { Recipe, User } from "../../firebase/models";
+import RecipePage from "../../pages/recipe/RecipePage";
 import "./RecipeCard.css";
 
 interface RecipeCardProps {
@@ -15,8 +16,12 @@ interface RecipeCardProps {
 }
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <IonCard>
+    <>
+    <RecipePage recipe={recipe} user={user} showModal={showModal} onSuccess={() => setShowModal(false)} />
+    <IonCard onClick={() => setShowModal(true)}>
       <IonCardHeader>
         <IonCardTitle>
           <div className="user-info recipe-info">
@@ -44,6 +49,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
       </div>
       <IonCardContent></IonCardContent>
     </IonCard>
+    </>
   );
 };
 
