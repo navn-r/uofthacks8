@@ -15,7 +15,7 @@ import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
-import {makeRecipe} from "../../firebase/api"
+import { makeRecipe } from "../../firebase/api";
 interface RecipeUploadProps {
   onSuccess: () => any;
   showModal: boolean;
@@ -37,6 +37,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     Array(tags.length).fill(false)
   );
   const [img, setImg] = React.useState("");
+  const [title, setTitle] = React.useState("");
 
   useEffect(() => {
     const clearData = () => {
@@ -47,22 +48,23 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       setAmounts([]);
       setMeasure([]);
       setSteps([""]);
+      setTitle("");
       setTagItems(tagItems.fill(false));
     };
     clearData();
   }, [showModal]);
 
-  const recipeSubmit = (recipeObj : {
-    foodItems : string[],
+  const recipeSubmit = (recipeObj: {
+    foodItems: string[];
     cost: number;
     desc: string;
     instructions: string[];
     tags: boolean[];
     url: string;
-  }) =>{
-    makeRecipe(recipeObj)
+  }) => {
+    makeRecipe(recipeObj);
     onSuccess();
-  }
+  };
 
   return (
     <div className="recipe-upload-container">
@@ -78,6 +80,15 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
             }}
           />
           <IonImg src={img} />
+        </IonItem>
+      </div>
+      <div>
+        <IonItem>
+          <IonTextarea
+            placeholder="What's your recipe name"
+            value={desc}
+            onIonChange={(e) => setTitle(e.detail.value!)}
+          ></IonTextarea>
         </IonItem>
       </div>
       <div>
@@ -225,21 +236,37 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       <div>
         <h4 className="cost-title">Cost</h4>
         <IonItem>
-          <IonRange min={1} max={4} step={1} snaps={true} color="secondary" onIonChange={e => setCost(e.detail.value as number)}>
+          <IonRange
+            min={1}
+            max={4}
+            step={1}
+            snaps={true}
+            color="secondary"
+            onIonChange={(e) => setCost(e.detail.value as number)}
+          >
             <IonLabel slot="start">$</IonLabel>
             <IonLabel slot="end">$$$$</IonLabel>
           </IonRange>
         </IonItem>
       </div>
-      <IonButton color="success" expand="block" id="submit-button" onClick={() => recipeSubmit({
-        foodItems, cost, desc,
-        instructions: steps,
-        tags: tagItems,
-        url: img
-      })}>
+      <IonButton
+        color="success"
+        expand="block"
+        id="submit-button"
+        onClick={() =>
+          recipeSubmit({
+            foodItems,
+            cost,
+            desc,
+            instructions: steps,
+            tags: tagItems,
+            url: img,
+          })
+        }
+      >
         Make Recipe
       </IonButton>
-    </div> 
+    </div>
   );
 };
 
