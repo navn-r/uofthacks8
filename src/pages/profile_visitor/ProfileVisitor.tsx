@@ -38,7 +38,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
       setRecipes(await getRecipes(user.recipeIds));
     };
     unsubscribe();
-  }, []);
+  }, [userId]);
 
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
