@@ -6,7 +6,7 @@ import {
   IonTabButton,
   IonTabs,
 } from "@ionic/react";
-import { ellipse, square, triangle } from "ionicons/icons";
+import { cloudyNight, ellipse, square, triangle } from "ionicons/icons";
 import { Redirect, Route } from "react-router-dom";
 import Tab1 from "./profile/Tab1";
 import HomePage from "./home/HomePage";
