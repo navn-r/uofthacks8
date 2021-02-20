@@ -27,7 +27,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
   onSuccess,
 }) => {
   return (
-    <IonModal isOpen={showModal}>
+    <IonModal isOpen={showModal} backdropDismiss={false}>
       <IonHeader>
         <IonToolbar>
           <IonTitle color="primary" class="ion-text-west">
