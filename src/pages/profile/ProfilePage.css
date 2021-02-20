@@ -5,9 +5,9 @@
   margin: 1rem 1.25rem;
 }
 
-.user-info .profile-title p {
+.user-info .auth-user-profile-title p {
   color: #dadada;
-  margin-left: 5px;
+  margin-top: 0.5rem;
 }
 
 .user-info .profile-title ion-text {
@@ -18,16 +18,15 @@
   color: #ffffff;
 }
 
-.user-info .profile-title {
-  margin-left: 13vw;
+.user-info .auth-user-profile-title{
+  margin-left: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .user-info ion-avatar {
-  width: 90px;
-  height: 90px;
+  width: 4.5rem;
+  height: 4.5rem;
   box-shadow: 0 0.5rem 3rem rgba(0,0,0,.09), 0 0.15rem 0.5rem rgba(0,0,0,.085);
 }
 
@@ -79,8 +78,6 @@
   font-size: 0.9em;
   border: 1px solid #ffffff !important;
   background: #d7d8da !important;
-  /* height: 10%; */
-  /* width: 41%; */
   max-width: 90vw;
   max-height: 5vh;
 }
@@ -88,11 +85,12 @@
 .user-recipes-title {
   text-align: center;
   font-size: 17px;
+  margin-top: 1.5rem;
 }
 
 .info {
-  padding: 1vh 0vw;
-  margin: 1vh 0vw;
+  padding: 1.15rem 0;
+  margin-bottom: 1rem;
   background-color:#3880ff;
 }
 .title-container {

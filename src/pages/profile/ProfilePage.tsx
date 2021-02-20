@@ -70,53 +70,12 @@ const ProfilePage: React.FC = () => {
           showModal={showModal}
           onSuccess={() => setShowModal(false)}
         />
-        <div className="user-recipes-container">
-          <div className="title-container">
-            <h4>Find Munchers</h4>
-            <IonButton
-              fill="clear"
-              color="danger"
-              size="small"
-              onClick={() => setShowExpandedUsers(!showExpandedUsers)}
-            >
-              <IonIcon
-                slot="icon-only"
-                icon={!showExpandedUsers ? chevronDown : chevronUp}
-              ></IonIcon>
-            </IonButton>
-          </div>
-          {showExpandedUsers && (
-            <>
-              <IonInput
-                placeholder="Search..."
-                onIonChange={(e) => setSearchUser(e.detail.value!)}
-              ></IonInput>
-              <IonList>
-                {allUsers
-                  .filter((user) => {
-                    return user.displayName.includes(searchUser);
-                  })
-                  .map((user) => (
-                    <IonItem
-                      key={user.displayName}
-                      onClick={() => setShowUser(user)}
-                    >
-                      <IonAvatar>
-                        <img src={user.photoURL} alt="avatar" />
-                      </IonAvatar>
-                      <p className={"avatar-name"}>{user.displayName}</p>
-                    </IonItem>
-                  ))}
-              </IonList>
-            </>
-          )}
-        </div>
         <div className="info">
           <div className="user-info">
             <IonAvatar>
               <img src={authUser.photoURL} />
             </IonAvatar>
-            <div className="white profile-title">
+            <div className="white profile-title auth-user-profile-title">
               <IonText color="light">{authUser.displayName}</IonText>
               <p>{authUser.email}</p>
             </div>
@@ -161,6 +120,47 @@ const ProfilePage: React.FC = () => {
               Sign Out
             </IonButton>
           </div>
+        </div>
+        <div className="user-recipes-container">
+          <div className="title-container">
+            <h4>Find Munchers</h4>
+            <IonButton
+              fill="clear"
+              color="danger"
+              size="small"
+              onClick={() => setShowExpandedUsers(!showExpandedUsers)}
+            >
+              <IonIcon
+                slot="icon-only"
+                icon={!showExpandedUsers ? chevronDown : chevronUp}
+              ></IonIcon>
+            </IonButton>
+          </div>
+          {showExpandedUsers && (
+            <>
+              <IonInput
+                placeholder="Search..."
+                onIonChange={(e) => setSearchUser(e.detail.value!)}
+              ></IonInput>
+              <IonList>
+                {allUsers
+                  .filter((user) => {
+                    return user.displayName.includes(searchUser);
+                  })
+                  .map((user) => (
+                    <IonItem
+                      key={user.displayName}
+                      onClick={() => setShowUser(user)}
+                    >
+                      <IonAvatar>
+                        <img src={user.photoURL} alt="avatar" />
+                      </IonAvatar>
+                      <p className={"avatar-name"}>{user.displayName}</p>
+                    </IonItem>
+                  ))}
+              </IonList>
+            </>
+          )}
         </div>
         {dataLoading ? (
           <IonSpinner />

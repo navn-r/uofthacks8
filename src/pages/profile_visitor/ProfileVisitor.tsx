@@ -71,7 +71,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               <IonAvatar>
                 <img src={profileUser.photoURL} />
               </IonAvatar>
-              <div className="info-title">
+              <div className="info-title profile-visitor-title">
                 <h3>{profileUser.displayName}</h3>
               </div>
             </div>
