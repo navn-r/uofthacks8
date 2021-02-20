@@ -20,6 +20,7 @@ import RecipeCard from "../../components/recipe/RecipeCard";
 import { getRecipes, getAllUsers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfilePage.css";
+import ProfileVisitor from "../../pages/profile_visitor/ProfileVisitor";
 
 const ProfilePage: React.FC = () => {
   const history = useHistory();
@@ -29,6 +30,7 @@ const ProfilePage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchUser, setSearchUser] = useState("");
   const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [showUser, setShowUser] = useState<User | null>(null);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -123,7 +125,15 @@ const ProfilePage: React.FC = () => {
                 return user.displayName.includes(searchUser);
               })
               .map((user) => (
-                <IonItem key={user.displayName}>{user.displayName}</IonItem>
+                <IonItem
+                  key={user.displayName}
+                  onClick={() => setShowUser(user)}
+                >
+                  <IonAvatar>
+                    <img src={user.photoURL} alt="avatar" />
+                  </IonAvatar>
+                  <p className={"avatar-name"}>{user.displayName}</p>
+                </IonItem>
               ))}
           </IonList>
         </div>
@@ -138,6 +148,15 @@ const ProfilePage: React.FC = () => {
           </div>
         )}
       </IonContent>
+      {showUser && (
+        <ProfileVisitor
+          userId={showUser?.id}
+          showModal={!!showUser}
+          onSuccess={() => {
+            setShowUser(null);
+          }}
+        />
+      )}
     </IonPage>
   );
 };
