@@ -18,7 +18,7 @@ export const initNewUser = (id: string): Promise<void> => {
     .set(INITIAL_USER, { merge: true });
 };
 
-export const addFollower = (uid: string, followerId: string) => {
+export const addFollower = (followerId: string) => {
   const uId = (auth.currentUser as firebase.User).uid;
 
   db.collection(userCollection)
