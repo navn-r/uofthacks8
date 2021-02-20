@@ -6,7 +6,8 @@
 }
 
 .user-info .title p {
-  color: #c2c2c2;
+  color: #dadada;
+  margin-left: 5px;
 }
 
 .user-info .title ion-text {
@@ -16,7 +17,7 @@
 .white {
   color: #ffffff;
 }
-
+  
 .user-info .title {
   margin-left: 13vw;
   display: flex;
