@@ -22,6 +22,11 @@ const RecipeSearch: React.FC = () => {
   const [tagItems, setTagItems] = React.useState<boolean[]>(
     Array(tags.length).fill(false)
   );
+  interface Cost {
+    lower: number;
+    upper: number;
+  }
+  const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
 
   return (
     <IonPage>
@@ -66,8 +71,6 @@ const RecipeSearch: React.FC = () => {
               {!!ingredients.length && (
                 <div className="ingredient-titles-container">
                   <p>Ingredient</p>
-                  <p>amount</p>
-                  <p>measure unit</p>
                 </div>
               )}
               <div className="ingredient-list">
