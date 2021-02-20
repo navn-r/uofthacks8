@@ -1,6 +1,7 @@
 import {
   IonButton,
   IonCheckbox,
+  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -28,8 +29,23 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
   const [tagItems, setTagItems] = React.useState<boolean[]>(
     Array(tags.length).fill(false)
   );
+  const [img, setImg] = React.useState("");
   return (
     <>
+      <div>
+        <IonItem>
+          Upload an image
+          <input
+            name="photo"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setImg(URL.createObjectURL(e.target.files![0]));
+            }}
+          />
+          <IonImg src={img} />
+        </IonItem>
+      </div>
       <div>
         <IonItem>
           <IonTextarea
@@ -71,9 +87,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
         </IonList>
         <IonList>
           <div className="ingredient-titles-container">
-              <p>Ingredient</p>
-              <p>amount</p>
-              <p>measure unit</p>
+            <p>Ingredient</p>
+            <p>amount</p>
+            <p>measure unit</p>
           </div>
           <div className="ingredient-list">
             {ingredients.map((item, index) => (
@@ -171,7 +187,9 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess }) => {
         </IonItem>
       </div>
 
-      <IonButton color="success" onClick={() => onSuccess()}>Make Recipe</IonButton>
+      <IonButton color="success" onClick={() => onSuccess()}>
+        Make Recipe
+      </IonButton>
     </>
   );
 };
