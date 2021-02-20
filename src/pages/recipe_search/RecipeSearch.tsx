@@ -14,6 +14,7 @@ import {
   IonText,
   IonTextarea,
   IonTitle,
+  IonToast,
   IonToolbar,
 } from "@ionic/react";
 import { close } from "ionicons/icons";
@@ -37,6 +38,7 @@ const RecipeSearch: React.FC = () => {
   const [cost, setCost] = React.useState<Cost>({ lower: 1, upper: 1 });
   const [title, setTitle] = React.useState("");
   const [showRecipes, setShowRecipes] = React.useState<Recipe[]>([]);
+  const [toastOpen, setOpenToast] = React.useState(false);
   const findRecipe = () => {
     const filteredTags = tags.filter((_, index) => tagItems[index]);
     getAllRecipes().then((recipes) => {
@@ -74,7 +76,10 @@ const RecipeSearch: React.FC = () => {
         if (!hasAllIngredients) break;
         filteredRecipes.push(recipe);
       }
-      setShowRecipes(filteredRecipes.slice(0, 10));
+      if (filteredRecipes.length) setShowRecipes(filteredRecipes.slice(0, 10));
+      else {
+        setOpenToast(true);
+      }
     });
   };
   return (
@@ -238,6 +243,13 @@ const RecipeSearch: React.FC = () => {
           ))}
         </IonContent>
       </IonModal>
+      <IonToast
+        isOpen={toastOpen}
+        onDidDismiss={() => setOpenToast(false)}
+        message="No recipes found."
+        color="primary"
+        duration={4000}
+      />
     </>
   );
 };
