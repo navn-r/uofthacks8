@@ -1,0 +1,33 @@
+.user-info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 5rem auto;
+  margin: 1rem 0.5rem;
+}
+
+.user-info .info-title * {
+  padding: 0;
+  margin: 0;
+}
+
+.user-info .info-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.follower-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.follower-box * {
+  margin: 0;
+  padding: 0;
+}
+
+.follower-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -19,8 +19,12 @@ const getRecipeDoc = (id: string) => db.collection(recipeCollection).doc(id);
 
 const getCurrentUserDoc = () => getUserDoc(getId());
 
-export const initNewUser = (): Promise<void> => {
-  return getCurrentUserDoc().set(INITIAL_USER, { merge: true });
+export const initNewUser = (user: firebase.User): Promise<void> => {
+  return getCurrentUserDoc().set({
+    ...INITIAL_USER,
+    photoURL: user.photoURL,
+    displayName: user.displayName
+  }, { merge: true });
 };
 
 export const addFollower = (followerId: string): Promise<any> => {
