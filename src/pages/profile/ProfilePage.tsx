@@ -8,17 +8,20 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../components/Auth/AuthProvider";
 import { useData } from "../../components/Data/DataContext";
-import { User } from "../../firebase/models";
+import RecipeCard from "../../components/recipe/RecipeCard";
+import { getRecipes } from "../../firebase/api";
+import { Recipe, User } from "../../firebase/models";
 import "./ProfilePage.css";
 
 const ProfilePage: React.FC = () => {
   const history = useHistory();
   const { logout, user: authUser } = useAuth();
   const { user: dataUser, loading: dataLoading } = useData();
+  const [recipes, setRecipes] = useState([] as Recipe[]);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -30,6 +33,14 @@ const ProfilePage: React.FC = () => {
   const addRecipe = () => {
     console.log("add recipe here");
   };
+
+  useEffect(() => {
+    if(dataLoading) return;
+    const unsubscribe = async () => {
+      setRecipes(await getRecipes(dataUser.recipeIds));
+    };
+    unsubscribe();
+  }, [dataUser, dataLoading]);
 
   return (
     <IonPage>
@@ -85,6 +96,7 @@ const ProfilePage: React.FC = () => {
         <div className="item-divider"></div>
         <div className="user-recipes-container">
             <h4>My Recipes</h4>
+            {recipes.map((r, i) => <RecipeCard user={dataUser} recipe={r} key={i} />)}
         </div>
       </IonContent>
     </IonPage>
