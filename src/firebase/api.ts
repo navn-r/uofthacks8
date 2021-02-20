@@ -130,3 +130,10 @@ export const getAllRecipes = async () => {
     (doc) => doc.data() as Recipe
   );
 };
+
+
+export const getAllUsers = async () => {
+  return (await db.collection(userCollection).get()).docs.map(
+    (doc) => doc.data() as User
+  )
+};
