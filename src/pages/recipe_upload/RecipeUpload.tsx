@@ -218,11 +218,10 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
           </IonRange>
         </IonItem>
       </div>
-
-      <IonButton color="success" onClick={() => onSuccess()}>
+      <IonButton expand="block" id="submit-button" color="success" onClick={() => onSuccess()}>
         Make Recipe
       </IonButton>
-    </div>
+    </div>    
   );
 };
 

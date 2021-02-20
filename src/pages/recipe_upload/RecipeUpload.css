@@ -67,3 +67,9 @@
   margin-bottom: 0;
   padding: 0.5rem 0 0 0;
 }
+
+#submit-button {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
