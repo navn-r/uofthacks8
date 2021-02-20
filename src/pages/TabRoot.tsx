@@ -1,23 +1,22 @@
 import {
   IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
 } from "@ionic/react";
-import { ellipse, square, triangle } from "ionicons/icons";
+import { home, person, search } from "ionicons/icons";
 import { Redirect, Route } from "react-router-dom";
-import Tab1 from "./profile/Tab1";
 import HomePage from "./home/HomePage";
+import ProfilePage from "./profile/ProfilePage";
 import SearchPage from "./search/SearchPage";
 
 const TabRoot: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet id="main">
-        <Route exact path="/main/tab1">
-          <Tab1 />
+        <Route exact path="/main/profile">
+          <ProfilePage />
         </Route>
         <Route exact path="/main/home">
           <HomePage />
@@ -25,20 +24,17 @@ const TabRoot: React.FC = () => {
         <Route path="/main/search">
           <SearchPage />
         </Route>
-        <Redirect to="/main/tab1" from="/main" exact />
+        <Redirect to="/main/home" from="/main" exact />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href="/main/tab1">
-          <IonIcon icon={triangle} />
-          <IonLabel>Tab 1</IonLabel>
+        <IonTabButton tab="profile" href="/main/profile">
+          <IonIcon icon={person} />
         </IonTabButton>
-        <IonTabButton tab="tab2" href="/main/home">
-          <IonIcon icon={ellipse} />
-          <IonLabel>Tab 2</IonLabel>
+        <IonTabButton tab="home" href="/main/home">
+          <IonIcon icon={home} />
         </IonTabButton>
-        <IonTabButton tab="tab3" href="/main/search">
-          <IonIcon icon={square} />
-          <IonLabel>Tab 3</IonLabel>
+        <IonTabButton tab="search" href="/main/search">
+          <IonIcon icon={search} />
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

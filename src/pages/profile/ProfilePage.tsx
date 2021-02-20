@@ -9,9 +9,9 @@ import {
 import { useCallback } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../components/Auth/AuthProvider";
-import "./Tab1.css";
+import "./ProfilePage.css";
 
-const Tab1: React.FC = () => {
+const ProfilePage: React.FC = () => {
   const history = useHistory();
   const { logout, user } = useAuth();
   const onLogout = useCallback(
@@ -26,7 +26,7 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle class="ion-text-center">Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -48,4 +48,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default ProfilePage;
