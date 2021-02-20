@@ -26,6 +26,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   showModal,
 }) => {
   const [desc, setDesc] = React.useState("");
+  const [cost, setCost] = React.useState(0);
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState<string[]>([]);
   const [ingredients, setIngredients] = React.useState<string[]>([]);
@@ -224,24 +225,21 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       <div>
         <h4 className="cost-title">Cost</h4>
         <IonItem>
-          <IonRange min={1} max={4} step={1} snaps={true} color="secondary">
+          <IonRange min={1} max={4} step={1} snaps={true} color="secondary" onIonChange={e => setCost(e.detail.value as number)}>
             <IonLabel slot="start">$</IonLabel>
             <IonLabel slot="end">$$$$</IonLabel>
           </IonRange>
         </IonItem>
       </div>
-
-      <IonButton color="success" onClick={() => recipeSubmit({
-        foodItems : foodItems,
-        cost: 1,
-        desc: desc,
+      <IonButton color="success" expand="block" id="submit-button" onClick={() => recipeSubmit({
+        foodItems, cost, desc,
         instructions: steps,
         tags: tagItems,
         url: img
       })}>
         Make Recipe
       </IonButton>
-    </div>
+    </div> 
   );
 };
 

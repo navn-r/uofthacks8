@@ -1,6 +1,8 @@
 .steps-container {
   width: 95%;
   margin: 0 auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ion-color-medium);
 }
 
 .ingredient-titles-container {
@@ -66,4 +68,10 @@
   margin: 1rem auto;
   margin-bottom: 0;
   padding: 0.5rem 0 0 0;
+}
+
+#submit-button {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
