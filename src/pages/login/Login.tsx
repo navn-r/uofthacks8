@@ -5,6 +5,7 @@ import { logoGoogle } from "ionicons/icons";
 import React, { useCallback } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../components/Auth/AuthProvider";
+import { initNewUser } from "../../firebase/api";
 import "./Login.css";
 
 const LoginPage: React.FC = () => {
@@ -14,9 +15,8 @@ const LoginPage: React.FC = () => {
     (e: any) => {
       e.preventDefault();
       login((user: firebase.auth.UserCredential) => {
-        // db.setRef(user.user!.uid);
-        // const promise = user.additionalUserInfo!.isNewUser ? db.initNewData() : Promise.resolve();
-        history.replace("/main");
+        const promise = user.additionalUserInfo!.isNewUser ? initNewUser(user.user!.uid) : Promise.resolve();
+        promise.then(() => history.replace("/main"));
       });
     },
     [history, login]
