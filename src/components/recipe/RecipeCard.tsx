@@ -14,7 +14,8 @@ import {
     IonCardContent,
     IonIcon,
     IonImg,
-    IonAvatar
+    IonAvatar,
+    IonLabel,
   } from "@ionic/react";
   import "./RecipeCard.css";
   import { Redirect, Route } from "react-router-dom";
@@ -35,23 +36,27 @@ interface RecipeCardProps {
               <IonAvatar>
                 <img src={user.photoURL} />
               </IonAvatar>
-              <div className="info-title">
+              <IonLabel>
                 <h3>{user.displayName}</h3>
-                </div>
+              </IonLabel>
               </div>
             </IonCardTitle>
-            <IonCardSubtitle>
-              
-            </IonCardSubtitle>
+              <img src={recipe.url}></img>
           </IonCardHeader>
-
+          <h6>{recipe.instructions}</h6>
+          <div>
+            <h6>Tags:</h6>
+            <br></br>
+            <ul>
+              {recipe.tags.map(tag => (<li>{tag}</li>))}
+            </ul>
+          </div>
           <IonCardContent>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+            
       </IonCardContent>
         </IonCard>
     );
-  };
+  };  
   
   export default RecipeCard;
   
