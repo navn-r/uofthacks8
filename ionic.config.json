@@ -1,0 +1,7 @@
+{
+  "name": "uofthacks8",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
