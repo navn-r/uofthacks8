@@ -3,6 +3,7 @@ import {
   IonButton,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonList,
@@ -11,7 +12,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useCallback, useEffect, useState } from "react";
+import { chevronDown, chevronUp } from "ionicons/icons";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import AddRecipeModal from "../../components/add-recipe-modal/AddRecipeModal";
 import { useAuth } from "../../components/Auth/AuthProvider";
@@ -28,6 +30,7 @@ const ProfilePage: React.FC = () => {
   const { user: dataUser, loading: dataLoading } = useData();
   const [recipes, setRecipes] = useState([] as Recipe[]);
   const [showModal, setShowModal] = useState(false);
+  const [showExpandedUsers, setShowExpandedUsers] = useState(false);
   const [searchUser, setSearchUser] = useState("");
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [showUser, setShowUser] = useState<User | null>(null);
@@ -115,29 +118,47 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="item-divider"></div>
         <div className="user-recipes-container">
-          <h4>Find Munchers</h4>
-          <IonInput
-            placeholder="Search..."
-            onIonChange={(e) => setSearchUser(e.detail.value!)}
-          ></IonInput>
-          <IonList>
-            {allUsers
-              .filter((user) => {
-                return user.displayName.includes(searchUser);
-              })
-              .map((user) => (
-                <IonItem
-                  key={user.displayName}
-                  onClick={() => setShowUser(user)}
-                >
-                  <IonAvatar>
-                    <img src={user.photoURL} alt="avatar" />
-                  </IonAvatar>
-                  <p className={"avatar-name"}>{user.displayName}</p>
-                </IonItem>
-              ))}
-          </IonList>
+          <div className="title-container">
+            <h4>Find Munchers</h4>
+            <IonButton
+              fill="clear"
+              color="danger"
+              size="small"
+              onClick={() => setShowExpandedUsers(!showExpandedUsers)}
+            >
+              <IonIcon
+                slot="icon-only"
+                icon={!showExpandedUsers ? chevronDown : chevronUp}
+              ></IonIcon>
+            </IonButton>
+          </div>
+          {showExpandedUsers && (
+            <>
+              <IonInput
+                placeholder="Search..."
+                onIonChange={(e) => setSearchUser(e.detail.value!)}
+              ></IonInput>
+              <IonList>
+                {allUsers
+                  .filter((user) => {
+                    return user.displayName.includes(searchUser);
+                  })
+                  .map((user) => (
+                    <IonItem
+                      key={user.displayName}
+                      onClick={() => setShowUser(user)}
+                    >
+                      <IonAvatar>
+                        <img src={user.photoURL} alt="avatar" />
+                      </IonAvatar>
+                      <p className={"avatar-name"}>{user.displayName}</p>
+                    </IonItem>
+                  ))}
+              </IonList>
+            </>
+          )}
         </div>
+
         <div className="item-divider"></div>
         {dataLoading ? (
           <IonSpinner />
