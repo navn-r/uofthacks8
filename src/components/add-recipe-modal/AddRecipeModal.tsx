@@ -10,7 +10,7 @@ interface AddRecipeModalProps {
 
 const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ showModal, onSuccess }) => {
   return (
-    <IonModal mode="ios" isOpen={showModal}>
+    <IonModal mode="ios" isOpen={showModal} backdropDismiss={false}>
        <IonHeader>
          <IonToolbar>
             <IonButton fill="clear" color="danger" onClick={onSuccess} size="small"><IonIcon slot="icon-only" icon={close}></IonIcon></IonButton>

@@ -1,6 +1,7 @@
 import {
   IonButton,
   IonCheckbox,
+  IonIcon,
   IonImg,
   IonInput,
   IonItem,
@@ -10,6 +11,7 @@ import {
   IonSearchbar,
   IonTextarea,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
@@ -129,15 +131,11 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
                     setMeasure(cpy);
                   }}
                 />
-                <IonButton
-                  color="danger"
-                  onClick={() => {
+            <IonButton fill="clear" color="danger" onClick={() => {
                     setAmounts(amounts.filter((_, i) => i !== index));
                     setIngredients(ingredients.filter((_, i) => i !== index));
-                  }}
-                >
-                  Remove
-                </IonButton>
+                  }} size="small"><IonIcon slot="icon-only" icon={close}></IonIcon></IonButton>
+
               </div>
             ))}
           </div>
