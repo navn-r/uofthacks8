@@ -6,20 +6,27 @@ import {
   IonCardTitle,
   IonSpinner,
 } from "@ionic/react";
-import React, { useState } from "react";
-import { Recipe, User } from "../../firebase/models";
+import React, { useEffect, useState } from "react";
+import { getUser } from "../../firebase/api";
+import { Recipe } from "../../firebase/models";
 import RecipePage from "../../pages/recipe/RecipePage";
 import "./RecipeCard.css";
 
 interface RecipeCardProps {
-  user: User;
   recipe: Recipe;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState(null as any);
 
-  return recipe ? (
+  useEffect(() => {
+    (async () => {
+      setUser(await getUser(recipe.userId));
+    })();
+  }, [recipe]);
+
+  return !!user && !!recipe ? (
     <>
       <RecipePage
         recipe={recipe}
@@ -49,16 +56,18 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ user, recipe }) => {
           ></img>
         </IonCardHeader>
         <p className="recipe-desc">{recipe.desc}</p>
-        {!!recipe.tags.length && <div className="tags-container">
-          <h6>Tags:</h6>
-          <div className="inner">
-            {recipe.tags.map((r) => (
-              <div key={r} className="recipe-tag">
-                {r}
-              </div>
-            ))}
+        {!!recipe.tags.length && (
+          <div className="tags-container">
+            <h6>Tags:</h6>
+            <div className="inner">
+              {recipe.tags.map((r) => (
+                <div key={r} className="recipe-tag">
+                  {r}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>}
+        )}
         <IonCardContent></IonCardContent>
       </IonCard>
     </>
