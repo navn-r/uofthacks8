@@ -30,7 +30,6 @@
   margin: 0 auto;
 }
 
-
 .ingredient-item-row * {
   display: flex;
   align-items: center;
@@ -74,4 +73,35 @@
   width: 95%;
   margin: 0 auto;
   margin-top: 2rem;
+}
+
+.step-inner-container {
+  display: grid;
+  grid-template-columns: auto 3rem;
+}
+
+.image-upload-container img {
+  max-height: 20rem;
+  width: 100%;
+  object-fit: scale-down;
+  object-position: top;
+}
+
+.image-upload-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  row-gap: 0.25rem;
+  border-bottom: 1px solid var(--ion-color-medium);
+}
+
+.image-upload-input-container input {
+  font-size: 17px;
+  color: #b8b8b8;
+}
+
+.desc-input {
+  margin-top: 1rem;
 }
