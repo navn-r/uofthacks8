@@ -25,6 +25,7 @@ const ProfilePage: React.FC = () => {
   const { user: dataUser, loading: dataLoading } = useData();
   const [recipes, setRecipes] = useState([] as Recipe[]);
   const [showModal, setShowModal] = useState(false);
+  const [searchUser, setSearchUser] = useState("");
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -44,7 +45,6 @@ const ProfilePage: React.FC = () => {
     };
     unsubscribe();
   }, [dataUser, dataLoading]);
-
   return (
     <IonPage>
       <IonHeader>
@@ -108,8 +108,11 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="item-divider"></div>
         <div className="user-recipes-container">
-          <h4>Find fellow Munchers</h4>
-          <IonInput placeholder="Search..."></IonInput>
+          <h4>Find Munchers</h4>
+          <IonInput
+            placeholder="Search..."
+            onIonChange={(e) => setSearchUser(e.detail.value!)}
+          ></IonInput>
         </div>
         <div className="item-divider"></div>
         {dataLoading ? (
