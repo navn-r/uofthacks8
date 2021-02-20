@@ -3,6 +3,7 @@ import {
   IonContent,
   IonHeader,
   IonPage,
+  IonSpinner,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -11,6 +12,8 @@ import { useData } from "../../components/Data/DataContext";
 import { getFollowers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./HomePage.css";
+import RecipeCard from "../../components/recipe/RecipeCard";
+
 
 const MockFollowers = [
   "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y",
@@ -60,6 +63,7 @@ const HomePage: React.FC = () => {
             </IonAvatar>
           ))}
         </div>
+        {loading ? (<IonSpinner></IonSpinner>) : (<RecipeCard user={user}></RecipeCard>)}
       </IonContent>
     </IonPage>
   );
