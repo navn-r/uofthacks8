@@ -7,7 +7,7 @@ export interface Food {
   name: string;
   desc: string;
 }
-export interface FoodItem{
+export interface FoodItem {
   foodId: string;
   amount: number;
   measureId: string;
@@ -18,6 +18,7 @@ export interface Recipe {
   desc: string;
   instructions: string[];
   tags: string[];
+  url: string;
 }
 
 export interface FoodNutrient {

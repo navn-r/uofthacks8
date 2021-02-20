@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
     (e: any) => {
       e.preventDefault();
       login((user: firebase.auth.UserCredential) => {
-        const promise = user.additionalUserInfo!.isNewUser ? initNewUser(user.user!.uid) : Promise.resolve();
+        const promise = user.additionalUserInfo!.isNewUser ? initNewUser() : Promise.resolve();
         promise.then(() => history.replace("/main"));
       });
     },
