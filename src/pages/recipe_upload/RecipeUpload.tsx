@@ -26,7 +26,6 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   showModal,
 }) => {
   const [desc, setDesc] = React.useState("");
-  const [cost, setCost] = React.useState(0);
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState<string[]>([]);
   const [ingredients, setIngredients] = React.useState<string[]>([]);
