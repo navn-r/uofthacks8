@@ -27,10 +27,22 @@ const RecipeSearch: React.FC = () => {
     upper: number;
   }
   const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
+  const [title, setTitle] = React.useState("");
 
   return (
     <IonPage>
       <IonContent fullscreen>
+        <div>
+          <IonSearchbar
+            value={title}
+            placeholder="Search for recipes"
+            onIonChange={(e) => {
+              const input = e.detail.value!.trim().toLowerCase();
+              setTitle(input);
+            }}
+            showCancelButton="never"
+          />
+        </div>
         <div className="recipe-upload-container">
           <div>
             <IonSearchbar
