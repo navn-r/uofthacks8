@@ -2,8 +2,8 @@ export interface User {
   followerIds: string[];
   followingIds: string[];
   recipeIds: string[];
-  pfpUrl: string;
-  name: string;
+  photoURL: string;
+  displayName: string;
 }
 export interface Recipe {
   foodItems: string[];
