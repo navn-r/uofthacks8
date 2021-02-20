@@ -30,15 +30,15 @@ const TabRoot: React.FC = () => {
       <IonTabBar slot="bottom">
         <IonTabButton tab="tab1" href="/main/tab1">
           <IonIcon icon={triangle} />
-          <IonLabel>Tab 1</IonLabel>
+          <IonLabel>Profile</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab2" href="/main/home">
           <IonIcon icon={ellipse} />
-          <IonLabel>Tab 2</IonLabel>
+          <IonLabel>Home</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab3" href="/main/search">
           <IonIcon icon={square} />
-          <IonLabel>Tab 3</IonLabel>
+          <IonLabel>Search</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
