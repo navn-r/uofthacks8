@@ -36,6 +36,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     Array(tags.length).fill(false)
   );
   const [img, setImg] = React.useState("");
+  const [title, setTitle] = React.useState("");
 
   useEffect(() => {
     const clearData = () => {
@@ -46,6 +47,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
       setAmounts([]);
       setMeasure([]);
       setSteps([""]);
+      setTitle("");
       setTagItems(tagItems.fill(false));
     };
     clearData();
@@ -58,6 +60,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     instructions: string[];
     tags: boolean[];
     url: string;
+    title: string;
   }) => {
     makeRecipe(recipeObj);
     onSuccess();
@@ -66,7 +69,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   return (
     <div className="recipe-upload-container">
       <div className="image-upload-container">
-      {!!img && <img src={img} />}
+        {!!img && <img src={img} />}
 
         <div className="image-upload-input-container">
           <input
@@ -80,6 +83,15 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         </div>
       </div>
       <div className="desc-input">
+        <IonItem>
+          <IonTextarea
+            placeholder="What's your recipe name"
+            value={desc}
+            onIonChange={(e) => setTitle(e.detail.value!)}
+          ></IonTextarea>
+        </IonItem>
+      </div>
+      <div>
         <IonItem>
           <IonTextarea
             placeholder="Talk about your recipe here..."
@@ -187,7 +199,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
                 fill="clear"
                 color="danger"
                 onClick={() => {
-                  setSteps(steps.filter((_, i) => i !== index))
+                  setSteps(steps.filter((_, i) => i !== index));
                 }}
                 size="small"
               >
@@ -257,6 +269,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
             instructions: steps,
             tags: tagItems,
             url: img,
+            title,
           })
         }
       >

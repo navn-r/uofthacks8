@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import { db, auth } from "./config";
 import { Recipe, User } from "./models";
-import {tags} from "./constants";
+import { tags } from "./constants";
 const userCollection = "users";
 const recipeCollection = "recipes";
 
@@ -24,12 +24,15 @@ const getRecipeDoc = (id: string) => db.collection(recipeCollection).doc(id);
 const getCurrentUserDoc = () => getUserDoc(getId());
 
 export const initNewUser = (user: firebase.User): Promise<void> => {
-  return getCurrentUserDoc().set({
-    ...INITIAL_USER,
-    id: user.uid,
-    photoURL: user.photoURL,
-    displayName: user.displayName
-  }, { merge: true });
+  return getCurrentUserDoc().set(
+    {
+      ...INITIAL_USER,
+      id: user.uid,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
+    },
+    { merge: true }
+  );
 };
 
 export const addFollower = (followerId: string): Promise<any> => {
@@ -76,17 +79,16 @@ export const getRecipe = async (uid: string): Promise<any> => {
 };
 
 export const getRecipes = async (recipes: string[]): Promise<any> => {
-  return Promise.all(recipes.map(id => getRecipe(id)));
+  return Promise.all(recipes.map((id) => getRecipe(id)));
 };
 
-
-interface RecipeTemp{
-    foodItems : string[],
-    cost: string;
-    desc: string;
-    instructions: string[];
-    tags: string[]; // index of which tags are used
-    url: string;
+interface RecipeTemp {
+  foodItems: string[];
+  cost: string;
+  desc: string;
+  instructions: string[];
+  tags: string[]; // index of which tags are used
+  url: string;
 }
 
 export const makeRecipe = async (recipe : {
@@ -96,6 +98,7 @@ export const makeRecipe = async (recipe : {
     instructions: string[];
     tags: boolean[]; // index of which tags are used
     url: string;
+    title: string
   }) : Promise<any> =>
   {
   const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
