@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
         {loading ? (
           <IonSpinner></IonSpinner>
         ) : (
-          recipes.map((r, i) => <RecipeCard key={i} recipe={r}></RecipeCard>)
+          recipes.filter((r,i) => r.userId !== user.id).map((r, i) => <RecipeCard key={i} recipe={r}></RecipeCard>)
         )}
       </IonContent>
     </IonPage>
