@@ -2,7 +2,6 @@ import {
   IonButton,
   IonCheckbox,
   IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -13,9 +12,9 @@ import {
 } from "@ionic/react";
 import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
+import { makeRecipe } from "../../firebase/api";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
-import { makeRecipe } from "../../firebase/api";
 interface RecipeUploadProps {
   onSuccess: () => any;
   showModal: boolean;
