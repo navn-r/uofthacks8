@@ -3,8 +3,6 @@ import {
   IonButton,
   IonContent,
   IonHeader,
-  IonItem,
-  IonLabel,
   IonPage,
   IonSpinner,
   IonTitle,
@@ -29,6 +27,10 @@ const ProfilePage: React.FC = () => {
     [history, logout]
   );
 
+  const addRecipe = () => {
+    console.log("add recipe here");
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -52,20 +54,42 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
         <div className="follower-info">
-        {dataLoading ? (
-          <IonSpinner />
-        ) : (
-          <>
-            <div className="follower-box">
-              <h4>{(dataUser as User).followerIds.length}</h4>
-              <p>Followers</p>
-            </div>
-            <div className="follower-box">
-              <h4>{(dataUser as User).followingIds.length}</h4>
-              <p>Followers</p>
-            </div>
-          </>
-        )}
+          {dataLoading ? (
+            <IonSpinner />
+          ) : (
+            <>
+              <div className="follower-box">
+                <h4>{(dataUser as User).followerIds.length}</h4>
+                <p>Followers</p>
+              </div>
+              <div className="follower-box">
+                <h4>{(dataUser as User).followingIds.length}</h4>
+                <p>Following</p>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="profile-button-container">
+          <IonButton
+            mode="ios"
+            onClick={addRecipe}
+            expand="block"
+            color="primary"
+          >
+            Add Recipe
+          </IonButton>
+          <IonButton
+            mode="ios"
+            onClick={onLogout}
+            expand="block"
+            color="danger"
+          >
+            Sign Out
+          </IonButton>
+        </div>
+        <div className="item-divider"></div>
+        <div className="user-recipes-container">
+            <h4>My Recipes</h4>
         </div>
       </IonContent>
     </IonPage>
@@ -73,7 +97,3 @@ const ProfilePage: React.FC = () => {
 };
 
 export default ProfilePage;
-
-/* <IonButton mode="ios" onClick={onLogout} shape="round" color="primary">
-          Sign Out
-        </IonButton> */
