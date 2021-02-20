@@ -84,7 +84,7 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="item-divider"></div>
         <div className="user-recipes-container">
-            <h4>My Recipes</h4>
+          <h4>My Recipes</h4>
         </div>
       </IonContent>
     </IonPage>

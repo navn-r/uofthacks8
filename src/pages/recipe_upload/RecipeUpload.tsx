@@ -14,14 +14,20 @@ import {
   IonTextarea,
   IonLabel,
   IonSearchbar,
+  IonInput,
 } from "@ionic/react";
 import { foods } from "../../firebase/constants";
 import React from "react";
+import "./RecipeUpload.css";
+
 const RecipeUpload: React.FC = () => {
   const [desc, setDesc] = React.useState("");
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState(foods);
   const [ingredients, setIngredients] = React.useState<string[]>([]);
+  const [amounts, setAmounts] = React.useState<string[]>([]);
+  const [measure, setMeasure] = React.useState<string[]>([]);
+  const [steps, setSteps] = React.useState<string[]>([""]);
   return (
     <IonPage>
       <IonHeader>
@@ -59,6 +65,7 @@ const RecipeUpload: React.FC = () => {
                 return (
                   <IonButton
                     color="primary"
+                    mode="ios"
                     key={item}
                     onClick={() => {
                       if (!ingredients.includes(item))
@@ -71,10 +78,76 @@ const RecipeUpload: React.FC = () => {
               })}
           </IonList>
           <IonList>
-            {ingredients.map((item) => (
-              <IonItem key={item}>{item}</IonItem>
-            ))}
+            <IonItem>
+              <IonLabel>Ingredient</IonLabel>
+              <IonLabel>amount</IonLabel>
+              <IonLabel>measure unit</IonLabel>
+            </IonItem>
+            <div className="ingredient-list">
+              {ingredients.map((item, index) => (
+                <IonItem key={item}>
+                  <IonLabel>{item}</IonLabel>
+                  <IonInput
+                    value={amounts[index]}
+                    placeholder={"200"}
+                    onIonChange={(e) => {
+                      const cpy = [...amounts];
+                      cpy[index] = e.detail.value!;
+                      setAmounts(cpy);
+                    }}
+                  />
+                  <IonInput
+                    value={amounts[index]}
+                    placeholder={"g"}
+                    onIonChange={(e) => {
+                      const cpy = [...measure];
+                      cpy[index] = e.detail.value!;
+                      setMeasure(cpy);
+                    }}
+                  />
+                  <IonButton
+                    onClick={() => {
+                      setAmounts(amounts.filter((_, i) => i !== index));
+                      setIngredients(ingredients.filter((_, i) => i !== index));
+                    }}
+                  >
+                    Remove
+                  </IonButton>
+                </IonItem>
+              ))}
+            </div>
           </IonList>
+        </div>
+        <div>
+          Steps
+          {steps.map((item, index) => (
+            <IonInput
+              key={index}
+              placeholder={`Enter step ${index + 1}`}
+              onIonChange={(e) => {
+                const cpy = [...steps];
+                cpy[index] = e.detail.value!;
+                setSteps(cpy);
+              }}
+              value={item}
+            />
+          ))}
+          <IonButton
+            onClick={() => {
+              setSteps([...steps, ""]);
+            }}
+          >
+            Add new step
+          </IonButton>
+          <IonButton
+            onClick={() => {
+              const cpy = [...steps];
+              if (cpy.length) cpy.pop();
+              setSteps(cpy);
+            }}
+          >
+            Remove step
+          </IonButton>
         </div>
       </IonContent>
     </IonPage>
