@@ -37,6 +37,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   );
   const [img, setImg] = React.useState("");
   const [title, setTitle] = React.useState("");
+  const [cost, setCost] = React.useState(1)
 
   useEffect(() => {
     const clearData = () => {
@@ -86,7 +87,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
         <IonItem>
           <IonTextarea
             placeholder="What's your recipe name"
-            value={title}
+            value={desc}
             onIonChange={(e) => setTitle(e.detail.value!)}
           ></IonTextarea>
         </IonItem>
