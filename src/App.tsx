@@ -17,6 +17,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import AuthGuardRoute from "./components/Auth/AuthGuardRoute";
 import { AuthProvider } from "./components/Auth/AuthProvider";
+import { DataProvider } from "./components/Data/DataContext";
 import LoginPage from "./pages/login/Login";
 import TabRoot from "./pages/TabRoot";
 /* Theme variables */
@@ -24,6 +25,7 @@ import "./theme/variables.css";
 
 const App: React.FC = () => (
   <AuthProvider>
+    <DataProvider>
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet id="main">
@@ -33,6 +35,7 @@ const App: React.FC = () => (
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
+    </DataProvider>
   </AuthProvider>
 );
 

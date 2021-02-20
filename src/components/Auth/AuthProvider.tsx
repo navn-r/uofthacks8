@@ -52,6 +52,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const value = {
+    userId: authState.user?.uid,
     ...authState,
     login,
     logout,
