@@ -9,7 +9,7 @@ import {
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useData } from "../../components/Data/DataContext";
-import { getFollowers, getRecipes } from "../../firebase/api";
+import { getAllRecipes, getFollowers, getRecipes } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./HomePage.css";
 import RecipeCard from "../../components/recipe/RecipeCard";
@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
     if (loading) return;
     const unsubscribe = async () => {
       const followers = await getFollowers(user.followerIds);
-      const recipes = await getRecipes(user.recipeIds);
+      const recipes = await getAllRecipes();
       setRecipes(recipes);
       setFollowers(
         followers.map((f: User) => {

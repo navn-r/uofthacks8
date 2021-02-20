@@ -115,8 +115,9 @@ export const makeRecipe = async (recipe : {
       
       return addRecipe(newRecipe as Recipe)
   }
-  
-
-
 }
+
+export const getAllRecipes = async (): Promise<any> => {
+  return (await db.collection(recipeCollection).get()).docs.map(doc => doc.data());
+};
     
