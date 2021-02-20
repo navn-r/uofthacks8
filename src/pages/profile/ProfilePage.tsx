@@ -45,11 +45,10 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     if (dataLoading) return;
-    const unsubscribe = async () => {
+    (async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
       setAllUsers(await getAllUsers());
-    };
-    unsubscribe();
+    })();
   }, [dataUser, dataLoading]);
   return (
     <IonPage>
@@ -148,15 +147,13 @@ const ProfilePage: React.FC = () => {
           </div>
         )}
       </IonContent>
-      {showUser && (
-        <ProfileVisitor
-          userId={showUser?.id}
-          showModal={!!showUser}
-          onSuccess={() => {
-            setShowUser(null);
-          }}
-        />
-      )}
+      <ProfileVisitor
+        userId={showUser ? showUser.id : ""}
+        showModal={!!showUser}
+        onSuccess={() => {
+          setShowUser(null);
+        }}
+      />
     </IonPage>
   );
 };
