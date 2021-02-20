@@ -26,6 +26,7 @@ const getCurrentUserDoc = () => getUserDoc(getId());
 export const initNewUser = (user: firebase.User): Promise<void> => {
   return getCurrentUserDoc().set({
     ...INITIAL_USER,
+    id: user.uid,
     photoURL: user.photoURL,
     displayName: user.displayName
   }, { merge: true });
