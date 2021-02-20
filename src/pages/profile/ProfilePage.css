@@ -1,22 +1,32 @@
 .user-info {
   width: 100%;
   display: grid;
-  grid-template-columns: 5rem auto;
-  margin: 1rem 0.5rem;
+  grid-template-columns:5rem auto;
+  margin: 1rem 1.25rem;
 }
 
-.user-info .info-title * {
-  padding: 0;
-  margin: 0;
+.user-info .title p {
+  color: #c2c2c2;
 }
 
-.user-info .info-title {
+.user-info .title ion-text {
+  font-size: 36px;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.user-info .title {
+  margin-left: 13vw;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
 .user-info ion-avatar {
+  width: 90px;
+  height: 90px;
   box-shadow: 0 0.5rem 3rem rgba(0,0,0,.09), 0 0.15rem 0.5rem rgba(0,0,0,.085);
 }
 
@@ -45,16 +55,42 @@
   margin-top: 1rem;
 }
 
-.item-divider {
-  height: 2px;
-  padding: 0;
-  margin: 1rem 0;
-  background-color: var(--ion-color-medium);
+.blue-text{
+  --ion-color-contrast:#3880ff!important;
 }
 
-.user-recipes-container h4 {
-  width: 100%;
+.red-text{
+  --ion-color-contrast:#eb445a!important;
+}
+
+.item-divider {
+  height: 0.1px;
+  padding: 0;
+  margin: 0.75 0;
+  background-color: var(--ion-color-medium);
+  opacity: 50%;
+}
+
+.searchbox {
+  margin: 2% 5vw 0%;
+  border-radius: 10px !important;
+  padding-right: 30px;
+  font-size: 0.9em;
+  border: 1px solid #ffffff !important;
+  background: #d7d8da !important;
+  /* height: 10%; */
+  /* width: 41%; */
+  max-width: 90vw;
+  max-height: 5vh;
+}
+
+.user-recipes-title {
   text-align: center;
-  font-weight: 300;
-  font-size: 1.5rem;
+  font-size: 17px;
+}
+
+.info {
+  padding: 1vh 0vw;
+  margin: 1vh 0vw;
+  background-color:#3880ff;
 }

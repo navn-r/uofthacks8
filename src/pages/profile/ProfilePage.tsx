@@ -6,6 +6,7 @@ import {
   IonInput,
   IonPage,
   IonSpinner,
+  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -59,63 +60,64 @@ const ProfilePage: React.FC = () => {
           showModal={showModal}
           onSuccess={() => setShowModal(false)}
         />
-        <div className="user-info">
-          <IonAvatar>
-            <img src={authUser.photoURL} />
-          </IonAvatar>
-          <div className="info-title">
-            <h3>{authUser.displayName}</h3>
-            <p>{authUser.email}</p>
+        <div className="searchbox">
+          <IonInput color="dark" placeholder="Find fellow munchers..."></IonInput>
+        </div>
+        <div className="info">
+          <div className="user-info">
+            <IonAvatar>
+              <img src={authUser.photoURL} />
+            </IonAvatar>
+            <div className="white title">
+              <IonText color="light">{authUser.displayName}</IonText>
+              <p>{authUser.email}</p>
+            </div>
+          </div>
+          <div className="follower-info">
+            {dataLoading ? (
+              <IonSpinner />
+            ) : (
+              <>
+                <div className="follower-box white">
+                  <h4>{(dataUser as User).recipeIds.length}</h4>
+                  <p>Munchies</p>
+                </div>
+                <div className="follower-box white">
+                  <h4>{(dataUser as User).followerIds.length}</h4>
+                  <p>Munchers</p>
+                </div>
+                <div className="follower-box white">
+                  <h4>{(dataUser as User).followingIds.length}</h4>
+                  <p>Munching</p>
+                </div>
+              </>
+            )}
+          </div>
+          <div className="profile-button-container">
+            <IonButton
+              mode="ios"
+              onClick={addRecipe}
+              expand="block"
+              color="light"
+              className="blue-text"
+            >
+              Add Munchie
+            </IonButton>
+            <IonButton
+              mode="ios"
+              onClick={onLogout}
+              expand="block"
+              color="light"
+              className="red-text"
+            >
+              Sign Out
+            </IonButton>
           </div>
         </div>
-        <div className="follower-info">
-          {dataLoading ? (
-            <IonSpinner />
-          ) : (
-            <>
-              <div className="follower-box">
-                <h4>{(dataUser as User).recipeIds.length}</h4>
-                <p>Munchies</p>
-              </div>
-              <div className="follower-box">
-                <h4>{(dataUser as User).followerIds.length}</h4>
-                <p>Munchers</p>
-              </div>
-              <div className="follower-box">
-                <h4>{(dataUser as User).followingIds.length}</h4>
-                <p>Munching</p>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="profile-button-container">
-          <IonButton
-            mode="ios"
-            onClick={addRecipe}
-            expand="block"
-            color="primary"
-          >
-            Add Munchie
-          </IonButton>
-          <IonButton
-            mode="ios"
-            onClick={onLogout}
-            expand="block"
-            color="danger"
-          >
-            Sign Out
-          </IonButton>
-        </div>
-        <div className="item-divider"></div>
-        <div className="user-recipes-container">
-          <h4>Find fellow Munchers</h4>
-          <IonInput placeholder="Search..."></IonInput>
-        </div>
-        <div className="item-divider"></div>
         {dataLoading ? (
           <IonSpinner />
         ) : (
-          <div className="user-recipes-container">
+          <div className="user-recipes-title">
             <h4>My Munchies</h4>
             {!!recipes &&
               recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
