@@ -15,7 +15,7 @@ import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
-
+import {makeRecipe} from "../../firebase/api"
 interface RecipeUploadProps {
   onSuccess: () => any;
   showModal: boolean;
@@ -50,6 +50,18 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     };
     clearData();
   }, [showModal]);
+
+  const recipeSubmit = (recipeObj : {
+    foodItems : string[],
+    cost: number;
+    desc: string;
+    instructions: string[];
+    tags: boolean[];
+    url: string;
+  }) =>{
+    makeRecipe(recipeObj)
+    onSuccess();
+  }
 
   return (
     <div className="recipe-upload-container">
@@ -218,10 +230,17 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
           </IonRange>
         </IonItem>
       </div>
-      <IonButton expand="block" id="submit-button" color="success" onClick={() => onSuccess()}>
+      <IonButton color="success" expand="block" id="submit-button" onClick={() => recipeSubmit({
+        foodItems : foodItems,
+        cost: 1,
+        desc: desc,
+        instructions: steps,
+        tags: tagItems,
+        url: img
+      })}>
         Make Recipe
       </IonButton>
-    </div>    
+    </div> 
   );
 };
 

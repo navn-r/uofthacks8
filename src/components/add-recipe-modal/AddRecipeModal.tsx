@@ -3,12 +3,15 @@ import { close } from 'ionicons/icons';
 import React from 'react';
 import RecipeUpload from '../../pages/recipe_upload/RecipeUpload';
 
+
 interface AddRecipeModalProps { 
   showModal: boolean;
   onSuccess: () => void;
 }
 
 const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ showModal, onSuccess }) => {
+
+
   return (
     <IonModal mode="ios" isOpen={showModal} backdropDismiss={false}>
        <IonHeader>
@@ -18,7 +21,7 @@ const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ showModal, onSuccess })
          </IonToolbar>
        </IonHeader>
        <IonContent>
-        <RecipeUpload showModal={showModal} onSuccess={() => console.log('weeee')} />
+        <RecipeUpload showModal={showModal} onSuccess={onSuccess} />
        </IonContent>
     </IonModal>
   );
