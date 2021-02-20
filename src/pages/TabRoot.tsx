@@ -8,9 +8,9 @@ import {
 } from "@ionic/react";
 import { ellipse, square, triangle } from "ionicons/icons";
 import { Redirect, Route } from "react-router-dom";
-import Tab1 from "./Tab1";
-import Tab2 from "./Tab2";
-import Tab3 from "./Tab3";
+import Tab1 from "./profile/Tab1";
+import HomePage from "./home/HomePage";
+import SearchPage from "./search/SearchPage";
 
 const TabRoot: React.FC = () => {
   return (
@@ -19,11 +19,11 @@ const TabRoot: React.FC = () => {
         <Route exact path="/main/tab1">
           <Tab1 />
         </Route>
-        <Route exact path="/main/tab2">
-          <Tab2 />
+        <Route exact path="/main/home">
+          <HomePage />
         </Route>
-        <Route path="/main/tab3">
-          <Tab3 />
+        <Route path="/main/search">
+          <SearchPage />
         </Route>
         <Redirect to="/main/tab1" from="/main" exact />
       </IonRouterOutlet>
@@ -32,11 +32,11 @@ const TabRoot: React.FC = () => {
           <IonIcon icon={triangle} />
           <IonLabel>Tab 1</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab2" href="/main/tab2">
+        <IonTabButton tab="tab2" href="/main/home">
           <IonIcon icon={ellipse} />
           <IonLabel>Tab 2</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab3" href="/main/tab3">
+        <IonTabButton tab="tab3" href="/main/search">
           <IonIcon icon={square} />
           <IonLabel>Tab 3</IonLabel>
         </IonTabButton>
