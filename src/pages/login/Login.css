@@ -1,0 +1,21 @@
+.background{
+    --background: #5EA8FF url('../../assets/background.jpg') no-repeat center center / cover;
+}
+
+div.title h1{
+    font-size: 65px;
+    color: aliceblue;
+    margin: 0;
+    padding: 0;
+    margin-top: 90%;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+div.signIn {
+    padding: 0%;
+    margin-top: 85%;
+    margin-bottom: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
