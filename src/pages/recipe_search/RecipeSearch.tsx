@@ -4,7 +4,6 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -21,7 +20,6 @@ import React from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeSearch.css";
 import { getAllRecipes } from "../../firebase/api";
-import { Recipe } from "../../firebase/models";
 const RecipeSearch: React.FC = () => {
   const [search, setSearch] = React.useState("");
   const [foodItems, setFoodItems] = React.useState<string[]>([]);
@@ -36,36 +34,38 @@ const RecipeSearch: React.FC = () => {
   const [cost, setCost] = React.useState<Cost>({ lower: 0, upper: 0 });
   const [title, setTitle] = React.useState("");
   const findRecipe = () => {
-    // const filteredTags = tags.filter((_, index) => tagItems[index]);
-    // getAllRecipes().then((recipes) => {
-    //   const filteredRecipes = [];
-    //   for (let i = 0; i < recipes.length; i++) {
-    //     const recipe = recipes[i];
-    //     if (!recipe.title.startsWith(title)) continue;
-    //     let hasTag = false;
-    //     for (let j = 0; j < recipe.tags.length; j++) {
-    //       if (filteredTags.includes(recipe.tags[j])) {
-    //         hasTag = true;
-    //         break;
-    //       }
-    //     }
-    //     if (!hasTag) continue;
-    //     const costs = ["cheap", "normal", "expensive", "high end"].filter(
-    //       (_, index) => {
-    //         return cost.lower <= index && index <= cost.upper;
-    //       }
-    //     );
-    //     if (!costs.includes(recipe.cost)) break;
-    //     let hasAllIngredients = true;
-    //     for (let j = 0; j < ingredients.length; j++) {
-    //       if (!recipe.foodItems.includes(ingredients[j]))
-    //         hasAllIngredients = false;
-    //     }
-    //     if (!hasAllIngredients) break;
-    //     filteredRecipes.push(recipe);
-    //   }
-    //   console.log(filteredRecipes);
-    // });
+    const filteredTags = tags.filter((_, index) => tagItems[index]);
+    getAllRecipes().then((recipes) => {
+      const filteredRecipes = [];
+      for (let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i];
+        if (!recipe.title.startsWith(title)) continue;
+        let hasTag = false;
+        for (let j = 0; j < recipe.tags.length; j++) {
+          if (filteredTags.includes(recipe.tags[j])) {
+            hasTag = true;
+            break;
+          }
+        }
+        if (!hasTag) continue;
+        const costs = ["cheap", "normal", "expensive", "high end"].filter(
+          (_, index) => {
+            return cost.lower <= index && index <= cost.upper;
+          }
+        );
+        if (!costs.includes(recipe.cost)) break;
+        let hasAllIngredients = true;
+        for (let j = 0; j < ingredients.length; j++) {
+          if (
+            !recipe.foodItems.map((item) => item.name).includes(ingredients[j])
+          )
+            hasAllIngredients = false;
+        }
+        if (!hasAllIngredients) break;
+        filteredRecipes.push(recipe);
+      }
+      console.log(filteredRecipes);
+    });
   };
   return (
     <IonPage>
@@ -126,29 +126,29 @@ const RecipeSearch: React.FC = () => {
                   );
                 })}
             </div>
-              <div>
-                {ingredients.map((item, index) => (
-                  <div className="ingredients-tag" key={item}>
-                    <div className="itemName">
-                      <IonLabel>{item}</IonLabel>
-                    </div>
-                    <div className="closeButton">
-                      <IonButton
-                        fill="clear"
-                        color="danger"
-                        onClick={() => {
-                          setIngredients(
-                            ingredients.filter((_, i) => i !== index)
-                          );
-                        }}
-                        size="small"
-                      >
-                        <IonIcon slot="icon-only" icon={close}></IonIcon>
-                      </IonButton>
-                    </div>
+            <div>
+              {ingredients.map((item, index) => (
+                <div className="ingredients-tag" key={item}>
+                  <div className="itemName">
+                    <IonLabel>{item}</IonLabel>
                   </div>
-                ))}
-              </div>
+                  <div className="closeButton">
+                    <IonButton
+                      fill="clear"
+                      color="danger"
+                      onClick={() => {
+                        setIngredients(
+                          ingredients.filter((_, i) => i !== index)
+                        );
+                      }}
+                      size="small"
+                    >
+                      <IonIcon slot="icon-only" icon={close}></IonIcon>
+                    </IonButton>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <IonList>
             <div className="property">
@@ -157,8 +157,8 @@ const RecipeSearch: React.FC = () => {
             <div className="taglist">
               {tags.map((item, index) => {
                 return (
-                  <div className="tag">
-                    <IonItem key={item}>
+                  <div key={item} className="tag">
+                    <IonItem>
                       <IonLabel>{item}</IonLabel>
                       <IonCheckbox
                         onClick={() => {
