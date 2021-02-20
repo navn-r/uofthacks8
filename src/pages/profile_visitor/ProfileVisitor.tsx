@@ -11,6 +11,7 @@ import {
 } from "@ionic/react";
 import { close } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../components/Auth/AuthProvider";
 import RecipeCard from "../../components/recipe/RecipeCard";
 import { addFollower, getRecipes, getUser } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
@@ -28,6 +29,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   onSuccess,
 }) => {
   const [recipes, setRecipes] = useState([] as Recipe[]);
+  const { user } = useAuth();
   const [profileUser, setProfileUser] = useState(null as unknown as User);
 
   useEffect(() => {
@@ -38,15 +40,17 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
       setRecipes(await getRecipes(user.recipeIds));
     };
     unsubscribe();
-  }, [userId]);
+  }, [userId, profileUser]);
 
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
       <IonHeader>
         <IonToolbar>
-          <IonTitle color="primary" class="ion-text-west">
-            Munchify
-          </IonTitle>
+          <div className="title">
+            <IonTitle color="primary" class="ion-text-west">
+              Munchify
+            </IonTitle>
+          </div>
           <div className="exit">
             <IonButton
               fill="clear"
@@ -87,10 +91,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                 </div>
               </>
             </div>
-            <div className="profile-button-container">
+            <div className="profile-button-container modal-profile">
               <IonButton
                 mode="ios"
                 onClick={() => addFollower(profileUser.id)}
+                disabled={profileUser.followerIds.includes(user.uid)}
                 expand="block"
                 color="primary"
               >

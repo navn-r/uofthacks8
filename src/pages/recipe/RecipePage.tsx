@@ -82,16 +82,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
           <IonText color="primary">Description</IonText>
           <p>{recipe.desc}</p>
         </div>
-        <div className="property">
-          <IonText color="primary">Tags</IonText>
-          <div className="inner">
-            {recipe.tags.map((r) => (
-              <div key={r} className="recipe-tag">
-                {r}
-              </div>
-            ))}
-          </div>
-        </div>
+
         <div className="property">
           <IonText color="primary">Ingredients</IonText>
           <div className="ingredients">
@@ -103,16 +94,27 @@ const RecipePage: React.FC<RecipePageProps> = ({
             ))}
           </div>
         </div>
+
         <div className="property">
           <IonText color="primary">Steps</IonText>
           <div className="ingredients">
             <ol>
               {recipe.instructions.map((r) => (
-                <li key={r}>
+                <li key={r} className="steps">
                   <div className="steps-tag">{r}</div>
                 </li>
               ))}
             </ol>
+          </div>
+        </div>
+        <div className="property">
+          <IonText color="primary">Tags</IonText>
+          <div className="inner">
+            {recipe.tags.map((r) => (
+              <div key={r} className="recipe-tag">
+                {r}
+              </div>
+            ))}
           </div>
         </div>
         <div className="nutrition">
