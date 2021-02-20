@@ -4,6 +4,8 @@ import {
   IonContent,
   IonHeader,
   IonInput,
+  IonItem,
+  IonList,
   IonPage,
   IonSpinner,
   IonTitle,
@@ -15,7 +17,7 @@ import AddRecipeModal from "../../components/add-recipe-modal/AddRecipeModal";
 import { useAuth } from "../../components/Auth/AuthProvider";
 import { useData } from "../../components/Data/DataContext";
 import RecipeCard from "../../components/recipe/RecipeCard";
-import { getRecipes } from "../../firebase/api";
+import { getRecipes, getAllUsers } from "../../firebase/api";
 import { Recipe, User } from "../../firebase/models";
 import "./ProfilePage.css";
 
@@ -25,6 +27,8 @@ const ProfilePage: React.FC = () => {
   const { user: dataUser, loading: dataLoading } = useData();
   const [recipes, setRecipes] = useState([] as Recipe[]);
   const [showModal, setShowModal] = useState(false);
+  const [searchUser, setSearchUser] = useState("");
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const onLogout = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -41,10 +45,10 @@ const ProfilePage: React.FC = () => {
     if (dataLoading) return;
     const unsubscribe = async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
+      setAllUsers(await getAllUsers());
     };
     unsubscribe();
   }, [dataUser, dataLoading]);
-
   return (
     <IonPage>
       <IonHeader>
@@ -108,8 +112,20 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="item-divider"></div>
         <div className="user-recipes-container">
-          <h4>Find fellow Munchers</h4>
-          <IonInput placeholder="Search..."></IonInput>
+          <h4>Find Munchers</h4>
+          <IonInput
+            placeholder="Search..."
+            onIonChange={(e) => setSearchUser(e.detail.value!)}
+          ></IonInput>
+          <IonList>
+            {allUsers
+              .filter((user) => {
+                return user.displayName.includes(searchUser);
+              })
+              .map((user) => (
+                <IonItem key={user.displayName}>{user.displayName}</IonItem>
+              ))}
+          </IonList>
         </div>
         <div className="item-divider"></div>
         {dataLoading ? (
