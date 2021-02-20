@@ -5,12 +5,11 @@ export interface User {
 }
 export interface Food {
   name: string;
-  desc: string;
 }
 export interface FoodItem {
   foodId: string;
   amount: number;
-  measureId: string;
+  measureType: string;
 }
 export interface Recipe {
   foodIds: FoodItem[];
