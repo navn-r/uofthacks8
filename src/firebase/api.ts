@@ -37,3 +37,7 @@ export const addRecipe = (recipe: Recipe): Promise<any> => {
     getCurrentUser().update({ recipeIds: firebase.firestore.FieldValue.arrayUnion(newId) })
   ]);
 };
+
+export const getUser = async (uid: string): Promise<any> => {
+  return getUserDoc(uid).get().then((doc) => Promise.resolve(doc.exists ? doc.data() : null));
+};
