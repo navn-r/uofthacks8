@@ -1,0 +1,20 @@
+.home-page-followers-title {
+  width: 100%;
+  font-weight: 300;
+  font-size: 1.25rem;
+  padding-left: 0.5rem;
+}
+
+.followers-icon-container {
+  height: 6rem;
+  overflow-x: scroll;
+  display: flex;
+  padding-left: 0.75rem;
+}
+
+.followers-icon-container ion-avatar {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
