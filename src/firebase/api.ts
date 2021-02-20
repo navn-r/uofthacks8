@@ -66,3 +66,5 @@ export const getFollowers = async (
 export const getFollowed = async (followedId: Array<string>): Promise<any> => {
   return getFollowers(followedId);
 };
+
+
