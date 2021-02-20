@@ -47,7 +47,9 @@ const ProfilePage: React.FC = () => {
     if (dataLoading) return;
     (async () => {
       setRecipes(await getRecipes(dataUser.recipeIds));
-      setAllUsers(await getAllUsers());
+      setAllUsers(
+        (await getAllUsers()).filter((user) => user.id !== dataUser.id)
+      );
     })();
   }, [dataUser, dataLoading]);
   return (
