@@ -61,6 +61,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
     instructions: string[];
     tags: boolean[];
     url: string;
+    title: string;
   }) => {
     makeRecipe(recipeObj);
     onSuccess();
@@ -69,7 +70,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
   return (
     <div className="recipe-upload-container">
       <div className="image-upload-container">
-      {!!img && <img src={img} />}
+        {!!img && <img src={img} />}
 
         <div className="image-upload-input-container">
           <input
@@ -199,7 +200,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
                 fill="clear"
                 color="danger"
                 onClick={() => {
-                  setSteps(steps.filter((_, i) => i !== index))
+                  setSteps(steps.filter((_, i) => i !== index));
                 }}
                 size="small"
               >
@@ -269,6 +270,7 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({
             instructions: steps,
             tags: tagItems,
             url: img,
+            title,
           })
         }
       >
