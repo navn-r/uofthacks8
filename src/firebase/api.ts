@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import { db, auth } from "./config";
 import { Recipe, User } from "./models";
-import { tags } from "./constants";
+import { tags as TAGS } from "./constants";
 const userCollection = "users";
 const recipeCollection = "recipes";
 
@@ -90,37 +90,36 @@ interface RecipeTemp {
   tags: string[]; // index of which tags are used
   url: string;
   title: string;
-  userId : string;
+  userId: string;
 }
 
-export const makeRecipe = async (recipe : {
-    foodItems : string[],
-    cost: number;
-    desc: string;
-    instructions: string[];
-    tags: boolean[]; // index of which tags are used
-    url: string;
-    title: string;
-  }) : Promise<any> =>
-  {
+export const makeRecipe = async (recipe: {
+  foodItems: string[];
+  cost: number;
+  desc: string;
+  instructions: string[];
+  tags: boolean[]; // index of which tags are used
+  url: string;
+  title: string;
+}): Promise<any> => {
+  const cost = ["cheap", "normal", "expensive", "high end"][recipe.cost - 1];
 
-  const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
-  
   var reader = new FileReader();
-  reader.readAsDataURL(await fetch(recipe.url).then(r => r.blob())); 
-  return reader.onloadend = function() {
-     const newRecipe : RecipeTemp = {...recipe, 
-      cost : cost, 
-      tags: tags.filter((tag, i) =>  recipe.tags[i]),
-      url : reader.result as string,
-      userId : getId()
-      }
-      
-      return addRecipe(newRecipe as Recipe)
-  }
-}
+  reader.readAsDataURL(await fetch(recipe.url).then((r) => r.blob()));
+  return (reader.onloadend = function () {
+    console.log(recipe.tags);
+    const newRecipe: RecipeTemp = {
+      ...recipe,
+      cost: cost ?? "cheap",
+      tags: TAGS.filter((_, i) => !!recipe.tags[i]),
+      url: reader.result as string,
+      userId: getId(),
+    };
+
+    return addRecipe(newRecipe as Recipe);
+  });
+};
 
 export const getAllRecipes = async () => {
   return (await db.collection(recipeCollection).get()).docs.map(doc => (doc.data() as Recipe));
 };
-    
