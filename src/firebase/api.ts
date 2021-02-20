@@ -68,3 +68,13 @@ export const getFollowers = async (
 export const getFollowed = async (followedId: Array<string>): Promise<any> => {
   return getFollowers(followedId);
 };
+
+export const getRecipe = async (uid: string): Promise<any> => {
+  return getRecipeDoc(uid)
+    .get()
+    .then((doc) => Promise.resolve(doc.exists ? doc.data() : null));
+};
+
+export const getRecipes = async (recipes: string[]): Promise<any> => {
+  return Promise.all(recipes.map(id => getRecipe(id)));
+};

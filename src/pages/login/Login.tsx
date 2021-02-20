@@ -24,10 +24,10 @@ const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <h1>Munchify</h1>
-        <div>
-          <IonButton mode="ios" onClick={onLogin} shape="round" color="primary">
+      <IonContent className="background" fullscreen>
+        <div className="splash-container"> 
+          <h1>Munchify</h1>
+          <IonButton mode="ios" onClick={onLogin} expand="block" color="primary">
             <IonIcon size="small" slot="start" icon={logoGoogle} />
             Sign in
           </IonButton>
