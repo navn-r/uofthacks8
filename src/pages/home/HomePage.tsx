@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-center">Munchify</IonTitle>
+          <IonTitle color="primary" class="ion-text-west">Munchify</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

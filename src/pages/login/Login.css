@@ -7,7 +7,7 @@
     color: aliceblue;
     margin: 0;
     padding: 0;
-    margin-bottom: 10%;
+    margin-bottom: 70%;
     text-align: center;
 }
 
@@ -17,12 +17,14 @@
     justify-content: center;
     width: 100%;
     flex-direction: column;
-    position: absolute;
     top: 0;
     left: 0;
     height: 100%;
 }
 
 .splash-container ion-button {
-    width: 60%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: -70%;
+    width: 40%;
 }
