@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import { db, auth } from "./config";
 import { Recipe, User } from "./models";
-
+import {tags} from "./constants";
 const userCollection = "users";
 const recipeCollection = "recipes";
 
@@ -79,33 +79,34 @@ export const getRecipes = async (recipes: string[]): Promise<any> => {
   return Promise.all(recipes.map(id => getRecipe(id)));
 };
 
-const b64toBlob = (b64Data : string, contentType='', sliceSize=512) => {
-  const byteCharacters = atob(b64Data);
-  const byteArrays = [];
 
-  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    const byteNumbers = new Array(slice.length);
-    for (let i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    const byteArray = new Uint8Array(byteNumbers);
-    byteArrays.push(byteArray);
-  }
-
-  const blob = new Blob(byteArrays, {type: contentType});
-  return blob;
+interface RecipeTemp{
+    foodItems : string[],
+    cost: string;
+    desc: string;
+    instructions: string[];
+    tags: string[]; // index of which tags are used
+    url: string;
 }
 
 export const makeRecipe = async (recipe : {
     foodItems : string[],
-    cost: "cheap" | "normal" | "expensive" | "high end";
+    cost: number;
     desc: string;
     instructions: string[];
-    tags: string[];
-    blob: string;
-  }) =>{
-  return addRecipe({...recipe, url : URL.createObjectURL(b64toBlob(recipe.blob))} as Recipe)
-}
+    tags: boolean[]; // index of which tags are used
+    url: string;
+  }) : Promise<any> =>
+  {
+  const cost = ["cheap" , "normal" , "expensive" , "high end"][recipe.cost-1]
+  const newRecipe : RecipeTemp = {...recipe, 
+    cost : cost, 
+    tags: tags.filter((tag, i) => {
+      if(recipe.tags[i]){
+        return true;
+      }
+      return false;
+    })
+    }
+    return addRecipe(newRecipe as Recipe)
+  }

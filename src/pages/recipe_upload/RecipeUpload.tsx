@@ -13,7 +13,7 @@ import {
 import React, { useEffect } from "react";
 import { foods, tags } from "../../firebase/constants";
 import "./RecipeUpload.css";
-
+import {makeRecipe} from "../../firebase/api"
 interface RecipeUploadProps {
   onSuccess: () => any;
   showModal: boolean
@@ -45,6 +45,18 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
     };
     clearData();
   }, [showModal]);
+
+  const recipeSubmit = (recipeObj : {
+    foodItems : string[],
+    cost: number;
+    desc: string;
+    instructions: string[];
+    tags: boolean[];
+    url: string;
+  }) =>{
+    makeRecipe(recipeObj)
+    onSuccess();
+  }
 
   return (
     <div className="recipe-upload-container">
@@ -203,7 +215,14 @@ const RecipeUpload: React.FC<RecipeUploadProps> = ({ onSuccess, showModal }) => 
         </IonItem>
       </div>
 
-      <IonButton color="success" onClick={() => onSuccess()}>
+      <IonButton color="success" onClick={() => recipeSubmit({
+        foodItems : foodItems,
+        cost: 1,
+        desc: desc,
+        instructions: steps,
+        tags: tagItems,
+        url: img
+      })}>
         Make Recipe
       </IonButton>
     </div>
