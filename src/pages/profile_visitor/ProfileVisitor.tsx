@@ -29,6 +29,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   onSuccess,
 }) => {
   const [recipes, setRecipes] = useState([] as Recipe[]);
+  const [track, setTrack] = useState(0);
   const { user } = useAuth();
   const [profileUser, setProfileUser] = useState(null as unknown as User);
 
@@ -40,7 +41,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
       setRecipes(await getRecipes(user.recipeIds));
     };
     unsubscribe();
-  }, [userId]);
+  }, [userId, track]);
 
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
@@ -94,7 +95,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             <div className="profile-button-container modal-profile">
               <IonButton
                 mode="ios"
-                onClick={() => addFollower(profileUser.id)}
+                onClick={() => {
+                  addFollower(profileUser.id).then(() => setTrack(track + 1));
+
+                }}
                 disabled={profileUser.followerIds.includes(user.uid)}
                 expand="block"
                 color="primary"
