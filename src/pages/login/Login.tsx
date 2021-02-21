@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
       e.preventDefault();
       login((user: firebase.auth.UserCredential) => {
         const promise = user.additionalUserInfo!.isNewUser ? initNewUser(user.user!) : Promise.resolve();
-        promise.then(() => history.replace("/main"));
+        promise.then(() => setTimeout(() => history.replace("/main"), 500));
       });
     },
     [history, login]
