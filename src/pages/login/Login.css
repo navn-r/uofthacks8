@@ -18,7 +18,6 @@
     left: 0;
     height: 102%;
     background-image: url('../../assets/background.jpg');
-    filter: brightness(0.7);
 }
 
 .splash-container ion-button {
