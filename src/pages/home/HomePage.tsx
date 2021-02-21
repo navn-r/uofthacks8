@@ -62,7 +62,10 @@ const HomePage: React.FC = () => {
         <ProfileVisitor
           userId={visitorId}
           showModal={showProfileModal}
-          onSuccess={() => setShowProfileModal(false)}
+          onSuccess={() => {
+            setVisitorId("");
+            setShowProfileModal(false);
+          }}
         />
         <div className="followers-icon-container">
           {followers
