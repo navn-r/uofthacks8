@@ -122,8 +122,8 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
         <div className="user-recipes-container">
-          <div className="title-container">
-            <h4>Find Munchers</h4>
+          <div className="title-container" style={{alignItems: 'center'}}>
+            <h4 style={{fontSize: '1.25rem'}}>Find Munchers</h4>
             <IonButton
               fill="clear"
               color="danger"
