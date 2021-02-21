@@ -166,7 +166,6 @@ const ProfilePage: React.FC = () => {
           <IonSpinner />
         ) : (
           <div className="user-recipes-title">
-            <h4>My Munchies</h4>
             {!!recipes &&
               recipes.map((r, i) => <RecipeCard recipe={r} key={i} />)}
           </div>
