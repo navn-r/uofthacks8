@@ -18,9 +18,9 @@
     left: 0;
     height: 102%;
     background-image: url('../../assets/background.jpg');
-    background-position-x: -30vw;
-    background-position-y: -10vh;
-    background-size: 170%;
+    background-position-x: -45vw;
+    background-position-y: -15vh;
+    background-size: 180%;
 }
 
 .splash-container ion-button {
