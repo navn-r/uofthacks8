@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonIcon, IonPage } from "@ionic/react";
+import { IonButton, IonContent, IonIcon, IonImg, IonPage, IonThumbnail } from "@ionic/react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { logoGoogle } from "ionicons/icons";
@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="splash-container"> 
-          <h1 style={{fontFamily: 'Covered By Your Grace', fontSize: '6rem'}}>Munchify</h1>
+          <img src={"/assets/Logo.png"} />
           <IonButton mode="ios" onClick={onLogin} expand="block" color="primary">
             <IonIcon size="small" slot="start" icon={logoGoogle} />
             Sign in
