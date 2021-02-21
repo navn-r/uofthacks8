@@ -35,7 +35,7 @@ const RecipeSearch: React.FC = () => {
     lower: number;
     upper: number;
   }
-  const [cost, setCost] = React.useState<Cost>({ lower: 1, upper: 1 });
+  const [cost, setCost] = React.useState<Cost>({ lower: 1, upper: 4 });
   const [title, setTitle] = React.useState("");
   const [showRecipes, setShowRecipes] = React.useState<Recipe[]>([]);
   const [toastOpen, setOpenToast] = React.useState(false);
@@ -200,6 +200,7 @@ const RecipeSearch: React.FC = () => {
                   min={1}
                   max={4}
                   step={1}
+                  value={cost}
                   snaps={true}
                   color="secondary"
                   onIonChange={(e) => {
