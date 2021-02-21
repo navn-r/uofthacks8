@@ -6,11 +6,11 @@
 }
 
 .followers-icon-container {
-  height: 6rem;
+  height: 5rem;
   overflow-x: scroll;
   display: flex;
   padding-left: 0.75rem;
-  margin: 2rem 0;
+  margin-top: 0.75rem;
   border-bottom: 1px solid var(--ion-color-medium);
 }
 
