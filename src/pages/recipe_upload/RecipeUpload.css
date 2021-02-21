@@ -1,0 +1,112 @@
+.steps-container {
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ion-color-medium);
+}
+
+.ingredient-titles-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
+  width: 95%;
+  margin: 0 auto;
+  border-top: 1px solid var(--ion-color-medium);
+  padding-top: 1rem;
+}
+
+.ingredient-titles-container p {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-content: inherit;
+}
+
+.ingredient-item-row {
+  display: grid;
+  grid-template-columns: 1.75fr 1fr 1fr 0.25fr;
+  height: 2.5rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.ingredient-item-row * {
+  display: flex;
+  align-items: center;
+}
+
+.ingredient-item-row ion-button {
+  height: 2rem;
+}
+
+.recipe-upload-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.food-items {
+  max-height: 20rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.food-item-tag {
+  height: 2rem;
+}
+
+.tags-title {
+  width: 95%;
+  margin: 1rem auto;
+  margin-bottom: 0;
+  padding: 0.5rem 0 0 0;
+  border-top: 1px solid var(--ion-color-medium);
+}
+
+.cost-title {
+  width: 95%;
+  margin: 1rem auto;
+  margin-bottom: 0;
+  padding: 0.5rem 0 0 0;
+}
+
+#submit-button {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.step-inner-container {
+  display: grid;
+  grid-template-columns: auto 3rem;
+}
+
+.image-upload-container img {
+  max-height: 20rem;
+  width: 100%;
+  object-fit: scale-down;
+  object-position: top;
+}
+
+.image-upload-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  row-gap: 0.25rem;
+  border-bottom: 1px solid var(--ion-color-medium);
+}
+
+.image-upload-input-container input {
+  font-size: 17px;
+  color: #b8b8b8;
+}
+
+.desc-input {
+  margin-top: 1rem;
+}
+
+.property{
+  margin: 15px 10px 0px;
+  font-size: 18px;
+}

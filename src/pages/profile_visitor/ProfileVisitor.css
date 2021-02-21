@@ -1,0 +1,63 @@
+.user-info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 5rem auto;
+  margin: 1rem 0.5rem;
+}
+
+.user-info .info-title * {
+  padding: 0;
+  margin: 0;
+}
+
+.user-info .info-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.profile-visitor-title {
+  margin-left: 2rem;
+}
+
+.user-info ion-avatar {
+  box-shadow: 0 0.5rem 3rem rgba(0,0,0,.09), 0 0.15rem 0.5rem rgba(0,0,0,.085);
+}
+
+.follower-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.follower-box * {
+  margin: 0;
+  padding: 0;
+}
+
+.follower-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-button-container {
+  width: 100%;
+}
+
+.item-divider {
+  height: 2px;
+  padding: 0;
+  margin: 1rem 0;
+  background-color: var(--ion-color-medium);
+}
+
+.user-recipes-container h4 {
+  width: 100%;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.modal-profile {
+ grid-template-columns: auto !important; 
+}
