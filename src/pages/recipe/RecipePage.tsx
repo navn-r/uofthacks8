@@ -101,8 +101,8 @@ const RecipePage: React.FC<RecipePageProps> = ({
           <IonText color="primary">Steps</IonText>
           <div className="ingredients">
             <ol>
-              {recipe.instructions.map((r) => (
-                <li key={r} className="steps">
+              {recipe.instructions.map((r, i) => (
+                <li key={i} className="steps">
                   <div className="steps-tag">{r}</div>
                 </li>
               ))}
@@ -112,8 +112,8 @@ const RecipePage: React.FC<RecipePageProps> = ({
         <div className="property">
           <IonText color="primary">Tags</IonText>
           <div className="inner">
-            {recipe.tags.map((r) => (
-              <div key={r} className="recipe-tag">
+            {recipe.tags.map((r, i) => (
+              <div key={i} className="recipe-tag">
                 {r}
               </div>
             ))}

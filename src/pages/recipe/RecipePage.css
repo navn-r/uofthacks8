@@ -79,5 +79,10 @@ p {
 }
 
 .recipe-page-user-info .info-title {
-    margin-left: 2rem;
+    margin-left: 0.5rem;
+}
+
+.recipe-page-user-info ion-avatar {
+    height: 3rem !important;
+    width: 3rem !important;
 }
