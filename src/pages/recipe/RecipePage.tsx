@@ -51,7 +51,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
       <IonHeader>
         <IonToolbar>
           <div className="title">
-            <IonTitle color="primary" class="ion-text-west">
+            <IonTitle color="primary" class="ion-text-west" style={{fontFamily: 'Covered By Your Grace', fontSize: '1.75rem'}}>
               Munchify
             </IonTitle>
           </div>
@@ -68,7 +68,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="user-info">
+        <div className="user-info recipe-page-user-info">
           <IonAvatar>
             <img src={user.photoURL} onClick={onClickModal}/>
           </IonAvatar>

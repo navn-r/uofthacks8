@@ -87,7 +87,7 @@ const RecipeSearch: React.FC = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonTitle color="primary" class="ion-text-west">
+            <IonTitle color="primary" class="ion-text-west" style={{fontFamily: 'Covered By Your Grace', fontSize: '1.75rem'}}>
               Munchify
             </IonTitle>
           </IonToolbar>

@@ -22,7 +22,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
   useEffect(() => {
     const unsubscribe = async () => {
-      if(!!user) return;      
+      if(!!user || !recipe) return;      
       setUser(await getUser(recipe.userId));
     };
     unsubscribe();
@@ -39,7 +39,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
       <IonCard onClick={() => setShowModal(true)}>
         <IonCardHeader>
           <IonCardTitle>
-            <div className="user-info recipe-info">
+            <div className="user-info recipe-info recipe-card-info">
               <IonAvatar>
                 <img src={user.photoURL} />
               </IonAvatar>

@@ -47,7 +47,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
       <IonHeader>
         <IonToolbar>
           <div className="title">
-            <IonTitle color="primary" class="ion-text-west">
+            <IonTitle color="primary" class="ion-text-west" style={{fontFamily: 'Covered By Your Grace', fontSize: '1.75rem'}}>
               Munchify
             </IonTitle>
           </div>

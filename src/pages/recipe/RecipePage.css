@@ -77,3 +77,7 @@ p {
 .steps {
     font-size: 15px;
 }
+
+.recipe-page-user-info .info-title {
+    margin-left: 2rem;
+}

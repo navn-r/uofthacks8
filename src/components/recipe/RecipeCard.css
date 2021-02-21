@@ -28,22 +28,31 @@
   font-size: 0.75rem;
 }
 
-.recipe-info {
+.recipe-card-info {
   grid-template-columns: 3rem auto !important;
+  margin: 0 !important;
 }
 
-.recipe-info ion-avatar {
-  width: 2.5rem;
-  height: 2.5rem;
+.recipe-card-info .info-title {
+  align-items: flex-start;
+  margin-left: 2rem;
+}
+
+.recipe-card-info ion-avatar {
+  width: 2rem !important;
+  height: 2rem !important;
   box-shadow: 0 0.5rem 3rem rgba(0,0,0,.09), 0 0.15rem 0.5rem rgba(0,0,0,.085);
 }
 
-.recipe-info h3 {
+.recipe-card-info h3 {
   font-size: 1.125rem;
+  margin: 0;
+
 }
 
-.recipe-info p {
+.recipe-card-info p {
   font-weight: 400;
   font-size: 0.875rem;
   color: var(--ion-color-medium-shade);
+  margin: 0;
 }
