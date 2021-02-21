@@ -58,6 +58,14 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           ></img>
         </IonCardHeader>
         <p className="recipe-desc">{recipe.desc}</p>
+          <div className="tags-container">
+            <h6>Cost:</h6>
+            <div className="inner">
+              <div className="recipe-tag success-tag">
+                  {recipe.cost.toUpperCase()}
+              </div>
+            </div>
+          </div>
         {!!recipe.tags.length && (
           <div className="tags-container">
             <h6>Tags:</h6>

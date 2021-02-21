@@ -16,8 +16,8 @@ import { close } from "ionicons/icons";
 import React, { useState } from "react";
 import { Recipe, User } from "../../firebase/models";
 import "./RecipePage.css";
-import ProfileVisitor from "../profile_visitor/ProfileVisitor"
-import {getId} from "../../firebase/api";
+import ProfileVisitor from "../profile_visitor/ProfileVisitor";
+import { getId } from "../../firebase/api";
 interface RecipePageProps {
   user: User;
   recipe: Recipe;
@@ -32,18 +32,18 @@ const RecipePage: React.FC<RecipePageProps> = ({
   onSuccess,
 }) => {
   const [showNextModal, setShowNextModal] = useState(false);
-  const carbs = Math.floor(Math.random()*20) + 20;
+  const carbs = Math.floor(Math.random() * 20) + 20;
   const fat = Math.floor(Math.random() * 20) + 20;
   const protein = Math.floor(Math.random() * 20) + 10;
-  const onClickModal = (e:any) =>{
-    if(user.id !== getId()){
+  const onClickModal = (e: any) => {
+    if (user.id !== getId()) {
       setShowNextModal(true);
     }
-  }
+  };
 
   return (
     <IonModal isOpen={showModal} backdropDismiss={false}>
-        <ProfileVisitor
+      <ProfileVisitor
         userId={user.id}
         showModal={showNextModal}
         onSuccess={() => setShowNextModal(false)}
@@ -51,7 +51,14 @@ const RecipePage: React.FC<RecipePageProps> = ({
       <IonHeader>
         <IonToolbar>
           <div className="title">
-            <IonTitle color="primary" class="ion-text-west" style={{fontFamily: 'Covered By Your Grace', fontSize: '1.75rem'}}>
+            <IonTitle
+              color="primary"
+              class="ion-text-west"
+              style={{
+                fontFamily: "Covered By Your Grace",
+                fontSize: "1.75rem",
+              }}
+            >
               Munchify
             </IonTitle>
           </div>
@@ -70,7 +77,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
       <IonContent>
         <div className="user-info recipe-page-user-info">
           <IonAvatar>
-            <img src={user.photoURL} onClick={onClickModal}/>
+            <img src={user.photoURL} onClick={onClickModal} />
           </IonAvatar>
           <div className="info-title">
             <h1>{recipe.title}</h1>
@@ -91,7 +98,9 @@ const RecipePage: React.FC<RecipePageProps> = ({
             {recipe.foodItems.map((r, i) => (
               <IonItem key={i}>
                 <IonCheckbox />
-                <div className="ingredients-tag-1">{r.amount} {r.unit} of {r.name}</div>
+                <div className="ingredients-tag-1">
+                  {r.amount} {r.unit} of {r.name}
+                </div>
               </IonItem>
             ))}
           </div>
@@ -110,6 +119,12 @@ const RecipePage: React.FC<RecipePageProps> = ({
           </div>
         </div>
         <div className="property">
+          <IonText color="primary">Cost</IonText>
+          <div className="recipe-tag success-tag" style={{width: 'max-content'}}>
+            {recipe.cost.toUpperCase()}
+          </div>
+        </div>
+        <div className="property">
           <IonText color="primary">Tags</IonText>
           <div className="inner">
             {recipe.tags.map((r, i) => (
@@ -123,9 +138,7 @@ const RecipePage: React.FC<RecipePageProps> = ({
           <IonText color="primary">Nutritional Facts</IonText>
           <p>Protein: {protein} grams</p>
           <p>Fat: {fat} grams</p>
-          <p>Carbohydrates: {carbs} grams
-
-          </p>
+          <p>Carbohydrates: {carbs} grams</p>
         </div>
       </IonContent>
     </IonModal>
