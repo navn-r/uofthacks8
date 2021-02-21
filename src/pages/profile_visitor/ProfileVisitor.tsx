@@ -56,7 +56,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             <IonButton
               fill="clear"
               color="danger"
-              onClick={onSuccess}
+              onClick={() => {
+                setRecipes([]);
+                onSuccess();
+              }}
               size="small"
             >
               <IonIcon slot="icon-only" icon={close}></IonIcon>
